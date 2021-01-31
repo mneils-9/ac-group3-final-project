@@ -11,9 +11,9 @@ This [web application](https://rbsdm.com/stats/stats/), created by [Ben Baldwin]
 
 This [blog post](https://www.pro-football-reference.com/blog/index7956.html?p=8470) on _pro-football-reference_ explained the formulation of a new index, The Rivers Index, to gauge how efficient quarterbacks play. Similar to the EPA, this metric aims to mainly focus on how well a quarterback plays based on their individual passing statistics.
 
-This [article](https://fivethirtyeight.com/features/the-steelers-and-bills-have-been-historically-lucky-so-far-the-chargers-have-not/) by _fivethirtyeight_ explains which teams overachieved/underachieved using the Pythagorean expectation to compute the expected record of the team., and compare it to their record mid-season.
+This [article](https://fivethirtyeight.com/features/the-steelers-and-bills-have-been-historically-lucky-so-far-the-chargers-have-not/) by _fivethirtyeight_ explains which teams overachieved/underachieved using the Pythagorean expectation to compute the expected record of the team, and compare it to their mid-season record.
 
-This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _fivethirtyeight_ shows their game predictions that are predicted through their Elo model, which is based on how teams preform against each other.
+This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _fivethirtyeight_ shows their game predictions which are predicted through based on their Elo model. This Elo model is formulated by looking at their head-to-head results ([full explanation](https://fivethirtyeight.com/methodology/how-our-nfl-predictions-work/)).
 
 ## Data Driven Questions this Project aims to Answer
 
