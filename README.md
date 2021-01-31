@@ -13,7 +13,7 @@ This [blog post](https://www.pro-football-reference.com/blog/index7956.html?p=84
 
 This [article](https://fivethirtyeight.com/features/the-steelers-and-bills-have-been-historically-lucky-so-far-the-chargers-have-not/) by _fivethirtyeight_ explains which teams overachieved/underachieved using the Pythagorean expectation to compute the expected record of the team, and compare it to their mid-season record.
 
-This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _fivethirtyeight_ shows their game predictions which are predicted through based on their Elo model. This Elo model is formulated by looking at their head-to-head results ([full explanation](https://fivethirtyeight.com/methodology/how-our-nfl-predictions-work/)).
+This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _fivethirtyeight_ shows their game predictions which are predicted based on their Elo model. This Elo model is formulated by looking at their head-to-head results ([full explanation](https://fivethirtyeight.com/methodology/how-our-nfl-predictions-work/)).
 
 ## Data Driven Questions this Project aims to Answer
 
