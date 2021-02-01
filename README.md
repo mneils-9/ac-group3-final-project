@@ -15,8 +15,6 @@ This [article](https://fivethirtyeight.com/features/the-steelers-and-bills-have-
 
 This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _fivethirtyeight_ shows their game predictions which are predicted based on their Elo model. This Elo model is formulated by looking at their head-to-head results ([full explanation](https://fivethirtyeight.com/methodology/how-our-nfl-predictions-work/)).
 
-This [data](https://www.kaggle.com/tobycrabtree/nfl-scores-and-betting-data) by _Spreadspoke_ shows National Football League (NFL) game results since 1966 with betting odds information since 1979. People who are into betting in Football can get a better understanding of their own statistical anyalysis and increased their betting outcomes by looking at this dataset.
-
 ## Data Driven Questions this Project aims to Answer
 
 - How did having no fans affect home field advantage?
@@ -42,3 +40,15 @@ This [data](https://www.kaggle.com/tobycrabtree/nfl-scores-and-betting-data) by 
   - There are 21 columns in this dataset.
 
   - It will help us answer if having no fans affected home field advantage and if teams benefited from having no fans.
+
+- NFL scores and betting data (https://www.kaggle.com/tobycrabtree/nfl-scores-and-betting-data)
+
+- We were able to download this dataset from Kaggle, which the user created the dataset from a variety of sources including games and scores from a variety of public websites such as ESPN, NFL.com, and Pro Football Reference.
+
+-This data is collected by sports data anaylysis company. This dataset gives the people who are into betting in Football a better understanding and analyzing heir own statistical analysis to increase their betting outcomes.
+
+-There are 106 rows in the dataset.
+
+-There are 40 columns in this dataset.
+
+-This data can help us answer how did the betting change in the 2020 season compared to the past seasons. 
