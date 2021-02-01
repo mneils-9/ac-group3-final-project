@@ -31,9 +31,9 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 
 - Attendance dataset (attendance2020.csv)
 
-  - We were able to download this dataset from pro-football-reference, which is a very reputable source of NFL data.
+  - We were able to download this dataset from pro-football-reference, which is a very reputable source for NFL data.
 
-  - Data is collected by sport
+  - Data is collected by sportradar. This dataset shows the number of fans for each team for all 17 weeks of the season. These numbers are the number of tickets counted at a game. 
 
   - There are 33 rows in the dataset.
 
