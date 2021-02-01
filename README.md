@@ -45,10 +45,10 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 
   - We were able to download this dataset from Kaggle, which the user created the dataset from a variety of sources including games and scores from a variety of public websites such as ESPN, NFL.com, and Pro Football Reference.
 
-  -This data is collected by sports data anaylysis company. This dataset gives the people who are into betting in Football a better understanding and analyzing heir own statistical analysis to increase their betting outcomes.
+  - This data is collected by sports data anaylysis company. This dataset gives the people who are into betting in Football a better understanding and analyzing heir own statistical analysis to increase their betting outcomes.
 
-  -There are 106 rows in the dataset.
+  - There are 106 rows in the dataset.
 
- -There are 40 columns in this dataset.
+ - There are 40 columns in this dataset.
  
- -This data can help us answer how did the betting change in the 2020 season compared to the past seasons. 
+ - This data can help us answer how did the betting change in the 2020 season compared to the past seasons. 
