@@ -15,6 +15,8 @@ This [article](https://fivethirtyeight.com/features/the-steelers-and-bills-have-
 
 This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _fivethirtyeight_ shows their game predictions which are predicted based on their Elo model. This Elo model is formulated by looking at their head-to-head results ([full explanation](https://fivethirtyeight.com/methodology/how-our-nfl-predictions-work/)).
 
+This [Data] (https://www.kaggle.com/tobycrabtree/nfl-scores-and-betting-data) by _Spreadspoke_ shows National Football League (NFL) game results since 1966 with betting odds information since 1979. People who are into betting in Football can get a better understanding of their own statistical anyalysis and increased their betting outcomes by looking at this dataset.
+
 ## Data Driven Questions this Project aims to Answer
 
 - How did having no fans affect home field advantage?
