@@ -33,11 +33,7 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 
   - We were able to download this dataset from pro-football-reference, which is a very reputable source for NFL data.
 
-<<<<<<< HEAD
-  - Data is collected by sportradar. This dataset shows the number of fans for each team for all 17 weeks of the season. These numbers are the number of tickets scanned at the games.
-=======
-  - Data is collected by sportradar. This dataset shows the number of fans for each team for all 17 weeks of the 2020 season. These numbers are the number of tickets counted at a game. 
->>>>>>> 6313f07190e6bd4a97c5f68b4b56d34ddf4c984c
+  - Data is collected by sportradar. This dataset shows the number of fans for each team for all 17 weeks of the 2020 season. These numbers represent the number of scanned tickets at the games.
 
   - There are 33 rows in the dataset.
 
