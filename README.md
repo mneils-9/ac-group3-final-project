@@ -28,3 +28,15 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 - How did the pandemic affect player salaries?
 
 ## Finding Data
+
+- Attendance dataset (attendance2020.csv)
+
+  - We were able to download this dataset from pro-football-reference, which is a very reputable source of NFL data.
+
+  - Data is collected by sport
+
+  - There are 33 rows in the dataset.
+
+  - There are 21 columns in this dataset.
+
+  - It will help us answer if having no fans affected home field advantage and if teams benefited from having no fans.
