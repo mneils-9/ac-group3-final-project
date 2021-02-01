@@ -51,4 +51,4 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 
   -There are 40 columns in this dataset.
  
-  -This data can help us answer how did the betting change in the 2020 season compared to the past seasons. 
+ -This data can help us answer how did the betting change in the 2020 season compared to the past seasons. 
