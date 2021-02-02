@@ -1,7 +1,7 @@
 # ac-group3-final-project
 
 ## Domain: Sports Betting in the NFL
-We chose to look at sports betting in the NFL, which is the practice of placing wagers on football players and games. There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in National Football League (NFL) betting, especially how the COVID 19 pandemic has affected football bets.
+We chose to look at sports betting in the NFL, which is the practice of placing wagers on football players and games. There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in National Football League (NFL) betting, especially how the COVID 19 pandemic has affected football betting and team play.
 
 ## Other Examples of Data Driven Projects in this Domain
 
@@ -29,7 +29,7 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 
 ## Finding Data
 
-- Attendance dataset 2020 (attendance2020.csv)
+- Attendance dataset 2020 (https://www.pro-football-reference.com/years/2020/attendance.htm#attendance)
 
   - We were able to download this dataset from pro-football-reference, which is a very reputable source for NFL data.
 
