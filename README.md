@@ -29,7 +29,7 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 
 ## Finding Data
 
-- Attendance dataset 2020 (https://www.pro-football-reference.com/years/2020/attendance.htm#attendance)
+- NFL Attendance 2020 (https://www.pro-football-reference.com/years/2020/attendance.htm#attendance)
 
   - We were able to download this dataset from pro-football-reference, which is a very reputable source for NFL data.
 
@@ -50,19 +50,29 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
   - There are 106 rows in the dataset.
 
   - There are 40 columns in this dataset.
- 
-  - This data can help us answer how did the betting change in the 2020 season compared to the past seasons. 
 
-- NFL Team Cash Payroll Tracker (https://www.spotrac.com/nfl/cash/) 
+  - This data can help us answer how did the betting change in the 2020 season compared to the past seasons.
 
-  - We were able to discover this dataset from Spotrac, which has become  the largest and most reliable online sports team & player contract resource on the internet. 
+- NFL Team Cash Payroll Tracker (https://www.spotrac.com/nfl/cash/)
+
+  - We were able to discover this dataset from Spotrac, which has become  the largest and most reliable online sports team & player contract resource on the internet.
+
+  - This data is collected by dara development and research team. This data set on the website currently boasts financial information for MLB, the NBA, NFL, NHL, and MLS.
+
+  - There are 30 rows in the dataset for each year.
+
+  - There are 4 colums in the dataset for each year.
+
+  - This data can help us answer how did the pandemic affect player salaries.
   
-  - This data is collected by dara development and research team. This data set on the website currently boasts financial information for MLB, the NBA, NFL, NHL, and MLS. 
-  
-  - There are 30 rows in the dataset for each year 
-  - There are 4 colums in the dataset for each year 
-  
-  - This data can help us answer how did the pandemic affect player salaries
-  
-  
-  
+- NFL Penalties 2020 (https://www.nflpenalties.com/)
+
+  - We were able to download this data from nfllpenalties.
+
+  - They retrieve their data from nflfastR, which is a known source for getting NFL play by play data. The creators of nflfastR are also the creators of the [web application](https://rbsdm.com/stats/stats/) mentioned above.
+
+  - There are 33 rows in the dataset.
+
+  - There are 15 columns in the dataset.
+
+  - This can help us further explore if fans can affect the game.
