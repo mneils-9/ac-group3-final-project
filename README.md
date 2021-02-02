@@ -55,7 +55,7 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 
 - NFL Team Cash Payroll Tracker (https://www.spotrac.com/nfl/cash/) 
 
-  - We were able to discover this dataset from Spotrac, which has become  the largest and most reliable online sports team, & player contract resource on the internet. 
+  - We were able to discover this dataset from Spotrac, which has become  the largest and most reliable online sports team & player contract resource on the internet. 
   
   - This data is collected by dara development and research team. This data set on the website currently boasts financial information for MLB, the NBA, NFL, NHL, and MLS. 
   
