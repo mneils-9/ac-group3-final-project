@@ -52,3 +52,17 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
   - There are 40 columns in this dataset.
  
   - This data can help us answer how did the betting change in the 2020 season compared to the past seasons. 
+
+- NFL Team Cash Payroll Tracker (https://www.spotrac.com/nfl/cash/) 
+
+  - We were able to discover this dataset from Spotrac, which has become  the largest and most reliable online sports team, & player contract resource on the internet. 
+  
+  - This data is collected by dara development and research team. This data set on the website currently boasts financial information for MLB, the NBA, NFL, NHL, and MLS. 
+  
+  - There are 30 rows in the dataset for each year 
+  - There are 4 colums in the dataset for each year 
+  
+  - This data can help us answer how did the pandemic affect player salaries
+  
+  
+  
