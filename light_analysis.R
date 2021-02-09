@@ -23,7 +23,7 @@ avg_spreads <- spread_scores_df %>%
 
 avg_ous <- spread_scores_df %>% 
   group_by(schedule_season) %>% 
-  summarise(avg_ou = mean(over_under_line))
+  summarise(avg_ou = mean(over_under_line, na.rm = TRUE))
 
 year_score_df <- left_join(prop_home_win, avg_spreads)
 
@@ -35,11 +35,22 @@ sb_spreads <- spread_scores_df %>%
 ggplot(data = sb_spreads) +
   geom_line(mapping = aes(x = schedule_season, y = spread_favorite))
 
-ggplot() +
-  geom_line(data = year_score_df, aes(x = schedule_season, y = prop), color = "darkcyan") +
-  ggsave("homewins.png")
+# Plot proportion home wins over the years.
+# ggplot() +
+#   geom_line(data = year_score_df, aes(x = schedule_season, y = prop_home_wins), color = "darkcyan") +
+#   ggsave("homewins.png")
 
-ggplot() +
-  geom_line(data = year_score_df, aes(x = schedule_season, y = ou_line, color = "darkcyan"))
+# Plot avg ou over the years.
+# ggplot() +
+#   geom_line(data = year_score_df, aes(x = schedule_season, y = avg_ou), color = "darkcyan") +
+#   ggsave("ou.png")
 
+# Plot avg line over the years.
+# ggplot() +
+#   geom_line(data = year_score_df, aes(x = schedule_season, y = avg_spread), color = "darkcyan") +
+#   ggsave("avgline.png")
             
+spread_scores_df %>% 
+  filter(schedule_season == 2020) %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = schedule_date, y = spread_favorite))
