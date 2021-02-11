@@ -2,6 +2,10 @@ library(tidyverse)
 
 # Read in data.
 scores_df <- read.csv("data:/spreadspoke_scores.csv")
+teams <- read.csv("data:/teamanno.csv")
+
+# Reformat date
+scores_df$schedule_date <- as.Date(scores_df$schedule_date, format = "%m/%d/%Y")
 
 # Add a new column to the dataframe where it tells us if the home team won/lost.
 scores_df <- scores_df %>% mutate(home_win = (score_home > score_away))
@@ -21,19 +25,56 @@ avg_spreads <- spread_scores_df %>%
   group_by(schedule_season) %>% 
   summarize(avg_spread = mean(spread_favorite))
 
+# Average ou of each season.
 avg_ous <- spread_scores_df %>% 
   group_by(schedule_season) %>% 
   summarise(avg_ou = mean(over_under_line, na.rm = TRUE))
 
+# Join dataframes.
 year_score_df <- left_join(prop_home_win, avg_spreads)
 
+# Join dataframes.
 year_score_df <- left_join(year_score_df, avg_ous)
 
+# Filter for only superbowl data.
 sb_spreads <- spread_scores_df %>% 
   filter(schedule_week == "Superbowl") 
 
+# Plot the average spread of favorite over the seasons.
+theme_set(theme_grey())
 ggplot(data = sb_spreads) +
-  geom_line(mapping = aes(x = schedule_season, y = spread_favorite))
+  geom_line(mapping = aes(x = schedule_season, y = spread_favorite), color = "skyblue4") +
+  xlab("Season") +
+  ylab("Avg. Spread") +
+  theme(text = element_text(size = 10,  family = "mono"))
+
+# Favorite team for each game.
+spread_scores_df <- mutate(spread_scores_df, team_favorite = NA)
+for (i in 1:nrow(spread_scores_df)) {
+  if (spread_scores_df$team_favorite_id[i] == "PICK") {
+    spread_scores_df$team_favorite[i] <- "PICK"
+  } else {
+    team <- teams %>% 
+      filter(Abbreviation == spread_scores_df$team_favorite_id[i]) %>% 
+      select(Name)
+    spread_scores_df$team_favorite[i] <- team
+  }
+}
+
+# Team won for each game.
+spread_scores_df <- mutate(spread_scores_df, team_win = NA)
+for (i in 1:nrow(spread_scores_df)) {
+  if (spread_scores_df$home_win[i]) {
+    spread_scores_df$team_win[i] <- spread_scores_df$team_home[i]
+  } else {
+    spread_scores_df$team_win[i] <- spread_scores_df$team_away[i]
+  }
+}
+
+# spread_scores_df <- mutate(spread_scores_df, favorite_win = str_detect(team_win, str_split(team_favorite, " ")[[1]][length(str_split(team_favorite, " ")[[1]])]))
+
+# Whether favorite team won or not.
+spread_scores_df <- mutate(spread_scores_df, favorite_win = (team_win == team_favorite))
 
 # Plot proportion home wins over the years.
 # ggplot() +
@@ -49,8 +90,18 @@ ggplot(data = sb_spreads) +
 # ggplot() +
 #   geom_line(data = year_score_df, aes(x = schedule_season, y = avg_spread), color = "darkcyan") +
 #   ggsave("avgline.png")
-            
-spread_scores_df %>% 
-  filter(schedule_season == 2020) %>% 
-  ggplot() +
-  geom_line(mapping = aes(x = schedule_date, y = spread_favorite))
+
+# Plot range of spreads for each week            
+# spread_scores_df %>%
+#   filter(schedule_season == 2020) %>%
+#   ggplot(aes(x = spread_favorite, xend = spread_favorite, 
+#              y = schedule_week, group = schedule_week)) + 
+#   geom_dumbbell(color="#a3c4dc", size=0.75, point.colour.l="#0e668b")
+
+# Plots the spreads for each week different visual
+# g <- spread_scores_df %>% 
+#   filter(schedule_season == 2020) %>% 
+#   arrange(schedule_date, decreasing = TRUE) %>% 
+#   ggplot(aes(schedule_week, spread_favorite))
+# g + geom_tufteboxplot() + 
+#   theme(axis.text.x = element_text(angle=65, vjust=0.6))
