@@ -7,6 +7,10 @@ teams <- read.csv("data:/teamanno.csv")
 # Reformat date
 scores_df$schedule_date <- as.Date(scores_df$schedule_date, format = "%m/%d/%Y")
 
+# Change SuperBowl to Superbowl and WildCard to Wildcard (2017 season)
+scores_df[scores_df$schedule_week == "SuperBowl", "schedule_week"] <- "Superbowl"
+scores_df[scores_df$schedule_week == "WildCard", "schedule_week"] <- "Wildcard"
+
 # Add a new column to the dataframe where it tells us if the home team won/lost.
 scores_df <- scores_df %>% mutate(home_win = (score_home > score_away))
 
@@ -76,6 +80,14 @@ for (i in 1:nrow(spread_scores_df)) {
 # Whether favorite team won or not.
 spread_scores_df <- mutate(spread_scores_df, favorite_win = (team_win == team_favorite))
 
+barplot(spread_scores_df$weather_detail)
+
+spread_scores_df %>% group_by(schedule_week) %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = schedule_season,y = spread_favorite), color = "#56B4E9", alpha = 0.25) +
+  facet_wrap(~ schedule_week) +
+  ggsave("spreadweekyears.png")
+  
 # Plot proportion home wins over the years.
 # ggplot() +
 #   geom_line(data = year_score_df, aes(x = schedule_season, y = prop_home_wins), color = "darkcyan") +
