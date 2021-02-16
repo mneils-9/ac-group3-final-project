@@ -7,7 +7,7 @@ output: html_document
 Main Question: How did the pandemic affect the betting markets of the 2020 NFL season.
 
 ```{r setup, include = FALSE}
-source("light_analysis.R")
+source("scripts:/summaryinfo.R")
 
 library("knitr")
 ```
@@ -17,7 +17,7 @@ This project aims to answer the question: _How did the COVID 19 pandemic affect 
 (more...?)
 
 ## Summary Information 
-After careful analysis, the data revealed that...
+Our dataset includes `r summary_info$num_obs` observations that contain values in the favorite team and spread favorite columns. We specifically chose to keep the observations with these variables since we want to study the trend of the betting. This turned out to be around `r summary_info$num_unique_years` seasons worth of data with `r summary_info$num_different_teams` different teams. Since we have more teams than the normal amount, we will have to take into account for teams that were created or folded. But ignoring the rows without spread data, the smallest spread turned out to be `r summary_info$favorite_min_spread`, which is also considered a 50/50 game or a tossup. Our biggest spread turned out be `r summary_info$favorite_max_spread`, which is considered to be a very one sided game. However, our mean turned out to be `r summary_info$favorite_spread_mean`, which was much closer to a 50/50 game than a one sided game. 
 
 aggregate table + label
 
