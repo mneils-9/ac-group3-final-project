@@ -29,11 +29,11 @@ E.g. the super bowl between the Chiefs and the Buccaneers this year (Super Bowl 
 ## Summary Information 
 Our dataset includes `r summary_info$num_obs` observations that contain values in the favorite team and spread favorite columns. We specifically chose to keep the observations with these variables since we wanted to study the trend of the betting. This turned out to be around `r summary_info$num_unique_years` seasons worth of data with `r summary_info$num_different_teams` different teams. Thus, ignoring the rows without spread data, the smallest spread turned out to be `r summary_info$favorite_min_spread`, which is also considered a 50/50 game or a tossup. Our biggest spread turned out be `r summary_info$favorite_max_spread`, which is considered to be a very one sided game. However, our mean turned out to be `r summary_info$favorite_spread_mean`, which was much closer to a 50/50 game than a one sided game. I also found that the proportion of home teams that were favored was `r summary_info$prop_home_favorite`, and of the home favorites I found the proportion to cover the spread to be `r summary_info$prop_home_favorite_cover`.
 
-aggregate table + label
-
-3 charts + label
+## *Table*
 
 ## *Chart 1 Title*
+```{r chat1}
+```
 
 ## *Chart 2 Title*
 
@@ -41,4 +41,6 @@ aggregate table + label
 ```
 
 ## *Chart 3 Title*
+```{r chart3}
+```
 
