@@ -92,10 +92,10 @@ spread_scores_df <- mutate(spread_scores_df, favorite_win = (team_win == team_fa
 spread_scores_df <- mutate(spread_scores_df, favorite_cover = NA)
 for (i in 1:nrow(spread_scores_df)) {
   if (spread_scores_df$favorite_win[i]) {
-    if (spread_scores_df$team_win[i] == spread_scores_df$team_home) {
-      spread_scores_df$favorite_cover[i] <- (spread_scores_df$score_away[i] - spread_scores_df$score_home[i] < spread_scores_df$spread_favorite)
+    if (spread_scores_df$team_win[i] == spread_scores_df$team_home[i]) {
+      spread_scores_df$favorite_cover[i] <- (spread_scores_df$score_away[i] - spread_scores_df$score_home[i] < spread_scores_df$spread_favorite[i])
     } else {
-      spread_scores_df$favorite_cover[i] <- (spread_scores_df$score_home[i] - spread_scores_df$score_away[i] < spread_scores_df$spread_favorite)
+      spread_scores_df$favorite_cover[i] <- (spread_scores_df$score_home[i] - spread_scores_df$score_away[i] < spread_scores_df$spread_favorite[i])
     }
   } else {
     spread_scores_df$favorite_cover[i] <- F

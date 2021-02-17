@@ -1,8 +1,8 @@
 library(tidyverse)
 
 # Read in data.
-scores_df <- read.csv("data:/spreadspoke_scores.csv")
-teams <- read.csv("data:/nfl_teams.csv")
+scores_df <- read.csv("../data:/spreadspoke_scores.csv")
+teams <- read.csv("../data:/nfl_teams.csv")
 
 # Reformat date
 scores_df$schedule_date <- as.Date(scores_df$schedule_date, format = "%m/%d/%Y")
@@ -44,10 +44,6 @@ year_score_df <- left_join(prop_home_win, avg_spreads)
 # Join dataframes.
 year_score_df <- left_join(year_score_df, avg_ous)
 
-# Filter for only superbowl data.
-sb_spreads <- scores_df %>% 
-  filter(schedule_week == "Superbowl") 
-
 # Favorite team for each game.
 scores_df <- mutate(scores_df, team_favorite = NA)
 for (i in 1:nrow(scores_df)) {
@@ -79,12 +75,14 @@ for (i in 1:nrow(scores_df)) {
   }
 }
 
+# If the favorite won the game.
 scores_df <- mutate(scores_df, favorite_win = (team_win == team_favorite))
 
+# If the favorite covered the spread.
 scores_df <- mutate(scores_df, favorite_cover = NA)
 for (i in 1:nrow(scores_df)) {
   if (scores_df$favorite_win[i]) {
-    if (scores_df$team_win[i] == scores_df$team_home) {
+    if (scores_df$team_win[i] == scores_df$team_home[i]) {
       scores_df$favorite_cover[i] <- (scores_df$score_away[i] - scores_df$score_home[i] < scores_df$spread_favorite[i])
     } else {
       scores_df$favorite_cover[i] <- (scores_df$score_home[i] - scores_df$score_away[i] < scores_df$spread_favorite[i])
@@ -108,11 +106,9 @@ summary_info$favorite_max_spread <- scores_df %>%
   filter(spread_favorite == min(spread_favorite)) %>% 
   pull(spread_favorite)
 summary_info$favorite_spread_mean <- mean(scores_df$spread_favorite, na.rm = T)
-summary_info$prop_home_wins <- scores_df %>% 
-  filter(score_home > score_away) %>% 
-  summarize(prop = n() / nrow(scores_df)) %>% 
-  pull(prop)
+summary_info$prop_home_wins <- mean(scores_df$team_home > scores_df$team_away)
 summary_info$temp_mean <- mean(scores_df$weather_temperature, na.rm = T)
-summary_info$prop_home_favorite <- scores_df %>% filter(team_home == team_win) %>%
-  summarize(prop = n() / nrow(scores_df)) %>%
-  pull(prop)
+summary_info$prop_home_favorite <- mean(scores_df$team_home == scores_df$team_favorite)
+summary_info$prop_favorite_cover <- mean(scores_df$favorite_cover == TRUE)
+summary_info$prop_home_favorite_cover <- mean(scores_df$team_favorite == scores_df$team_home & scores_df$favorite_cover == TRUE)
+  
