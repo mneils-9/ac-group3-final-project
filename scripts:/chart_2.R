@@ -21,26 +21,6 @@ scores_df <- scores_df %>% mutate(home_win = (score_home > score_away))
 # Create a dataframe with rows containing spread data.
 spread_scores_df <- scores_df %>% filter(!is.na(spread_favorite))
 
-# Average spread of each season.
-avg_spreads <- spread_scores_df %>% 
-  group_by(schedule_season) %>% 
-  summarize(avg_spread = mean(spread_favorite))
-
-# Average ou of each season.
-avg_ous <- spread_scores_df %>% 
-  group_by(schedule_season) %>% 
-  summarise(avg_ou = mean(over_under_line, na.rm = TRUE))
-
-# Join dataframes.
-year_score_df <- left_join(prop_home_win, avg_spreads)
-
-# Join dataframes.
-year_score_df <- left_join(year_score_df, avg_ous)
-
-# Filter for only superbowl data.
-sb_spreads <- spread_scores_df %>% 
-  filter(schedule_week == "Superbowl") 
-
 # Favorite team for each game.
 spread_scores_df <- mutate(spread_scores_df, team_favorite = NA)
 for (i in 1:nrow(spread_scores_df)) {
@@ -116,9 +96,7 @@ spread_scores_df <- spread_scores_df[rev(order(as.Date(spread_scores_df$schedule
 #   geom_histogram(data = pick_df, mapping = aes(x = abs(score_home - score_away)))
 # grid.arrange(p1, p2, nrow = 1)
 
-## @knitr chart2
-
-spread_scores_df %>% 
+plot2 <- spread_scores_df %>% 
   ggplot() +
   geom_boxplot(mapping = aes(y = abs(score_home - score_away))) + 
   facet_wrap(~ favorite_cover) +
