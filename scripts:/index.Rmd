@@ -35,17 +35,25 @@ Our dataset includes `r summary_info$num_obs` observations that contain values i
 ```{r chat1}
 ```
 
-## Chart 2
+## Chart 2: Point Differentials When Favorites Win vs. Lose
 
 ```{r plot2, echo=FALSE}
 scores_df %>% 
-  ggplot() +
-  geom_boxplot(mapping = aes(y = abs(score_home - score_away))) + 
-  facet_wrap(~ favorite_cover) +
-  labs(y = "Point Difference", title = "Point Difference in favorite_cover FALSE vs. TRUE")
+  ggplot(aes(x = favorite_win, y = abs(score_home - score_away), fill = favorite_win)) +
+  geom_boxplot(alpha = 0.3)  +
+  scale_fill_brewer(palette = "Dark2") +
+  geom_jitter(color="black", size=0.2, alpha=0.25) +
+  theme_minimal() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=22),
+    axis.title.x = element_text(size = 16),
+    axis.title.y = element_text(size = 16)
+  ) +
+  xlab("") + ylab("Game Point Differential") + xlab("Favorite Won")
 ```
 
-This chart aims to show close games are when teams that are favored don't cover. We can clearly see that the point differential for when teams that are favored don't cover is much lower. We will be able to compare the distribution to the games in 2020 to see how it might have deviated from the averages.
+This chart aims to show how closer games are when favorites lose. We can see that the point differential is lower than when favorites win.
 
 ## *Chart 3 Title*
 ```{r chart3}
