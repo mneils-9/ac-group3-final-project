@@ -39,11 +39,13 @@ aggregate table + label
 
 ```{r plot2, echo=FALSE}
 scores_df %>% 
-  ggplot(data = ) +
+  ggplot() +
   geom_boxplot(mapping = aes(y = abs(score_home - score_away))) + 
   facet_wrap(~ favorite_cover) +
   labs(y = "Point Difference", title = "Point Difference in favorite_cover FALSE vs. TRUE")
 ```
+
+This chart aims to show close games are when teams that are favored don't cover. We can clearly see that the point differential for when teams that are favored don't cover is much lower. We will be able to compare the distribution to the games in 2020 to see how it might have deviated from the averages.
 
 ## *Chart 3 Title*
 
