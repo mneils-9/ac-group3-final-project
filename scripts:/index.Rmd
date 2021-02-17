@@ -35,7 +35,7 @@ aggregate table + label
 
 ## *Chart 1 Title*
 
-## *Chart 2 Title*
+## Chart 2
 
 ```{r plot2, echo=FALSE}
 scores_df %>% 
