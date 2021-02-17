@@ -7,8 +7,8 @@ output: html_document
 Main Question: How did the pandemic affect the betting markets of the 2020 NFL season?
 
 ```{r setup, include = FALSE}
+library("ggplot2")
 source("../scripts:/summaryinfo.R")
-source("../scripts:/chart_2.R")
 
 library("knitr")
 ```
@@ -35,9 +35,14 @@ Our dataset includes `r summary_info$num_obs` observations that contain values i
 ```{r chat1}
 ```
 
-## *Chart 2 Title*
+## Chart 2
 
-```{r chart2}
+```{r plot2, echo=FALSE}
+scores_df %>% 
+  ggplot(data = ) +
+  geom_boxplot(mapping = aes(y = abs(score_home - score_away))) + 
+  facet_wrap(~ favorite_cover) +
+  labs(y = "Point Difference", title = "Point Difference in favorite_cover FALSE vs. TRUE")
 ```
 
 ## *Chart 3 Title*
