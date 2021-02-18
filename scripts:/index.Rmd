@@ -1,0 +1,61 @@
+---
+title: "COVID 19's Affect on 2020 NFL sports betting"
+author: "INFO 201 Lab AC Group 3"
+date: "2/13/2020"
+output: html_document
+---
+Main Question: How did the pandemic affect the betting markets of the 2020 NFL season?
+
+```{r setup, include = FALSE}
+library("ggplot2")
+source("../scripts:/summaryinfo.R")
+
+library("knitr")
+```
+
+## Project Intro
+This project aims to answer the question: _How did the COVID 19 pandemic affect the betting markets during the 2020 NFL season._ Sports betting is common worldwide, and this project focuses specifically on wagers placed on players and games from the United State's National Football League (NFL). There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in NFL betting, especially how the COVID 19 pandemic has affected football betting and team play.
+(more...?)
+
+## Key Terms
+_Spread_ - the expected point margin in which a team will _win/lose_ by. In other words, how much a team is favored by. A _negative_ spread implies the team is favored by that amount, a _positive_ spread implies the team is the underdog by that amount. 
+
+_Cover the spread_ - the underdog/favored team was able to win/lose by the certain threshold. An underdog team can _lose_ by the number of points set in the spread or less and _cover the spread_. In other words, the underdog is given a handicap. However, the favored team __has__ to _win_ by the given spread or they will not _cover the spread_. 
+
+_Over Under_ - the expected _total number_ of points scored by both teams in the given game. People can either bet on the over (going to go over the expected total) or the under (going under the expected total).
+
+E.g. the super bowl between the Chiefs and the Buccaneers this year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 57.7. This means that the Chiefs were favored by 3.5 points, and they had to win by 3.5 points or else they wouldn't cover the spread. The Buccaneers on the other hand, could lose by less than 3.5 points or just win to cover the spread. The Buccaneers came out on top 31-9, so Chiefs didn't cover and the game went under since the total points scored was under 57.7.
+
+## Summary Information 
+Our dataset includes `r summary_info$num_obs` observations that contain values in the favorite team and spread favorite columns. We specifically chose to keep the observations with these variables since we wanted to study the trend of the betting. This turned out to be around `r summary_info$num_unique_years` seasons worth of data with `r summary_info$num_different_teams` different teams. Thus, ignoring the rows without spread data, the smallest spread turned out to be `r summary_info$favorite_min_spread`, which is also considered a 50/50 game or a tossup. Our biggest spread turned out be `r summary_info$favorite_max_spread`, which is considered to be a very one sided game. However, our mean turned out to be `r summary_info$favorite_spread_mean`, which was much closer to a 50/50 game than a one sided game. I also found that the proportion of home teams that were favored was `r summary_info$prop_home_favorite`, and of the home favorites I found the proportion to cover the spread to be `r summary_info$prop_home_favorite_cover`.
+
+## *Table*
+
+## *Chart 1 Title*
+```{r chat1}
+```
+
+## Chart 2: Point Differentials When Favorites Win vs. Lose
+
+```{r plot2, echo=FALSE}
+scores_df %>% 
+  ggplot(aes(x = favorite_win, y = abs(score_home - score_away), fill = favorite_win)) +
+  geom_boxplot(alpha = 0.3)  +
+  scale_fill_brewer(palette = "Dark2") +
+  geom_jitter(color="black", size=0.2, alpha=0.25) +
+  theme_minimal() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=22),
+    axis.title.x = element_text(size = 16),
+    axis.title.y = element_text(size = 16)
+  ) +
+  xlab("") + ylab("Game Point Differential") + xlab("Favorite Won")
+```
+
+This chart aims to show how closer games are when favorites lose. We can see that the point differential is lower than when favorites win.
+
+## *Chart 3 Title*
+```{r chart3}
+```
+
