@@ -9,8 +9,6 @@ Main Question: How did the pandemic affect the betting markets of the 2020 NFL s
 ```{r setup, include = FALSE}
 library("ggplot2")
 source("../scripts:/summaryinfo.R")
-source("../scripts:/chart_1.R")
-source("../scripts:/chart_2.R")
 
 library("knitr")
 ```
@@ -35,8 +33,7 @@ Our dataset includes `r summary_info$num_obs` observations that contain values i
 Our dataset uses 'scores_df' observations. We decided to focus on the favorite team and the average score of the the home team. We chose to focus on this because for each NFL game the oddsmakers set a number of points in which the favored team is favored by. Bettors can then either choose for the favored team to win by more than the number of points set, or bet on the underdogs to lose by less than the number of points they are underdogs by or win the game. Therefore by figuring out the favorite team and the average score of the hometeam, it'll give us a better chance of prediction how much points the favorite team will win or lose by. 
 
 ## Plot 1: The Average Percent Accuracy of Projected Favorites by Season
-```{r plot1, code = readLines('chart_1.R'), echo = FALSE}
-```
+
 
 ## Plot 2: Point Differentials When Home Team Is Favored vs. Not Favored
 

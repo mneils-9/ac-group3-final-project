@@ -1,6 +1,4 @@
 library(tidyverse)
-library(hrbrthemes)
-library(viridis)
 
 source("changedf.R")
 
