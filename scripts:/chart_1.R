@@ -18,12 +18,14 @@ yearly_projection_accuracy <- projection_accuracy %>%
 # Make plot!
 plot1 <- ggplot(data = yearly_projection_accuracy) +
   geom_point(mapping = aes(x = schedule_season, y = `mean(percent_accuracy)`),color = "#013369")+
-  geom_smooth(mapping = aes(x = schedule_season, y = `mean(percent_accuracy)`), color = "#D50A0A") +
+  geom_smooth(mapping = aes(x = schedule_season, y = `mean(percent_accuracy)`), color = "#D50A0A", method = "loess", formula = y ~x) +
   theme_minimal() +
   labs(
     title = "The Average Percent Accuracy of Projected Favorites by Season",
     x = "Season (Year)",
     y = "Percent Accuracy"
   )
+
+plot1
 
 
