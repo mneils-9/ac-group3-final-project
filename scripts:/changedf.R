@@ -42,19 +42,6 @@ for (i in 1:nrow(scores_df)) {
   }
 }
 
-# # Favorite team for each game.
-# scores_df <- mutate(scores_df, team_favorite = NA)
-# for (i in 1:nrow(scores_df)) {
-#   if (scores_df$team_favorite_id[i] == "PICK") {
-#     sscores_df$team_favorite[i] <- "PICK"
-#   } else {
-#     teams_df_get_name <- match(scores_df$team_favorite_id[i],
-#                                teams$Abbreviation, nomatch = NA_integer_, incomparables = NULL)
-#     scores_df$team_favorite[i] <- teams$Name[teams_df_get_name]
-#   }
-# }
-
-
 # Team won for each game.
 scores_df <- mutate(scores_df, team_win = NA)
 for (i in 1:nrow(scores_df)) {
@@ -82,9 +69,6 @@ for (i in 1:nrow(scores_df)) {
   }
 }
 
-<<<<<<< HEAD
-=======
-
 # New column for percent accuracy
 scores_df <- mutate(scores_df, percent_accuracy = NA)
 for (i in 1:nrow(scores_df)) {
@@ -95,4 +79,3 @@ for (i in 1:nrow(scores_df)) {
     scores_df$percent_accuracy[i] <- 0
   }
 }
->>>>>>> 448b15f3a14456a496b28893e190127a8022fae6

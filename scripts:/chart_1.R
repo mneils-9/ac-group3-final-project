@@ -25,5 +25,4 @@ plot1 <- ggplot(data = yearly_projection_accuracy) +
     x = "Season (Year)",
     y = "Percent Accuracy"
   )
-
-
+plot1
