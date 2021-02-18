@@ -82,6 +82,8 @@ for (i in 1:nrow(scores_df)) {
   }
 }
 
+<<<<<<< HEAD
+=======
 
 # New column for percent accuracy
 scores_df <- mutate(scores_df, percent_accuracy = NA)
@@ -93,3 +95,4 @@ for (i in 1:nrow(scores_df)) {
     scores_df$percent_accuracy[i] <- 0
   }
 }
+>>>>>>> 448b15f3a14456a496b28893e190127a8022fae6
