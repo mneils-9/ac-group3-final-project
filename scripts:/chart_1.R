@@ -28,4 +28,3 @@ plot1 <- ggplot(data = yearly_projection_accuracy) +
 
 plot1
 
-
