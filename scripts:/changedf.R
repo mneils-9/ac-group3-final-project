@@ -68,3 +68,4 @@ for (i in 1:nrow(scores_df)) {
     scores_df$favorite_cover[i] <- F
   }
 }
+
