@@ -9,8 +9,6 @@ Main Question: How did the pandemic affect the betting markets of the 2020 NFL s
 ```{r setup, include = FALSE}
 library("ggplot2")
 source("../scripts:/summaryinfo.R")
-source("../scripts:/chart_1.R")
-source("../scripts:/chart_2.R")
 
 library("knitr")
 ```
@@ -38,15 +36,9 @@ Our dataset uses 'scores_df' observations. We decided to focus on the favorite t
 ```{r plot1, code = readLines('chart_1.R'), echo = FALSE}
 ```
 
-<<<<<<< HEAD
 ## Chart 2: Point Differentials When Home Team Is Favored vs. Not Favored
 
 ```{r chart2, code = readLines('chart_2.R'), echo = FALSE}
-=======
-## Plot 2: Point Differentials When Home Team Is Favored vs. Not Favored
-
-```{r plot2test, code = readLines('chart_2.R'), echo = FALSE}
->>>>>>> 41e289389a59ade63558d7988bf43451368cd168
 ```
 
 This chart aims to compare how different the outcomes are when home teams are favored vs when they are not. We can clearly see in the chart that when home teams are favorites, they win by a larger margin and lose by a smaller margin. It also seems like the distribution of when the home teams aren't favorites seem similar as seen in the boxplot shape. Overall, we can see a clear difference between the two groups.
