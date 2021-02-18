@@ -72,9 +72,17 @@ projection_accuracy <- spread_scores_df %>%
 
 yearly_projection_accuracy <- projection_accuracy %>%
   group_by(schedule_season) %>%
-  summarise(mean(percent_accuracy))
+  summarise (mean(percent_accuracy))
   
 # Make plot!
-
+plot1 <- ggplot(data = yearly_projection_accuracy) +
+  geom_point(mapping = aes(x = schedule_season, y = `mean(percent_accuracy)`),color = "#013369")+
+  geom_smooth(mapping = aes(x = schedule_season, y = `mean(percent_accuracy)`), color = "#D50A0A") +
+  theme_minimal() +
+  labs(
+    title = "The Average Accuracy of Projected Favorites by Season",
+    x = "Season (Year)",
+    y = "Percent Accuracy"
+  )
 
 

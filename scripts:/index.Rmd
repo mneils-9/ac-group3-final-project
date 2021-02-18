@@ -9,6 +9,8 @@ Main Question: How did the pandemic affect the betting markets of the 2020 NFL s
 ```{r setup, include = FALSE}
 library("ggplot2")
 source("../scripts:/summaryinfo.R")
+source("../scripts:/chart_1.R")
+source("../scripts:/chart_2.R")
 
 library("knitr")
 ```
@@ -30,20 +32,38 @@ E.g. the super bowl between the Chiefs and the Buccaneers this year (Super Bowl 
 Our dataset includes `r summary_info$num_obs` observations that contain values in the favorite team and spread favorite columns. We specifically chose to keep the observations with these variables since we wanted to study the trend of the betting. This turned out to be around `r summary_info$num_unique_years` seasons worth of data with `r summary_info$num_different_teams` different teams. Thus, ignoring the rows without spread data, the smallest spread turned out to be `r summary_info$favorite_min_spread`, which is also considered a 50/50 game or a tossup. Our biggest spread turned out be `r summary_info$favorite_max_spread`, which is considered to be a very one sided game. However, our mean turned out to be `r summary_info$favorite_spread_mean`, which was much closer to a 50/50 game than a one sided game. I also found that the proportion of home teams that were favored was `r summary_info$prop_home_favorite`, and of the home favorites I found the proportion to cover the spread to be `r summary_info$prop_home_favorite_cover`.
 
 ## *Table*
+<<<<<<< HEAD
 Our dataset uses 'scores_df' observations. We decided to focus on the favorite team and the average score of the the home team. We chose to focus on this because for each NFL game the oddsmakers set a number of points in which the favored team is favored by. Bettors can then either choose for the favored team to win by more than the number of points set, or bet on the underdogs to lose by less than the number of points they are underdogs by or win the game. Therefore by figuring out the favorite team and the average score of the hometeam, it'll give us a better chance of prediction how much points the other team will win or lose by. 
 ```{r table,code=readLines('table.R'), echo=FALSE}
 knitr::kable(summarytable)
 ```
 ## *Chart 1 Title*
 ```{r chat1}
+=======
+Our dataset uses 'scores_df' observations. We decided to focus on the favorite team and the average score of the the home team. We chose to focus on this because for each NFL game the oddsmakers set a number of points in which the favored team is favored by. Bettors can then either choose for the favored team to win by more than the number of points set, or bet on the underdogs to lose by less than the number of points they are underdogs by or win the game. Therefore by figuring out the favorite team and the average score of the hometeam, it'll give us a better chance of prediction how much points the favorite team will win or lose by. 
+
+## Plot 1: The Average Percent Accuracy of Projected Favorites by Season
+```{r plot1, code = readLines('chart_1.R'), echo = FALSE}
+>>>>>>> 91e39abbd95723d4df9f2e0f9bb55004b2e3b061
 ```
 
+<<<<<<< HEAD
 ## Chart 2: Point Differentials When Home Team Is Favored vs. Not Favored
 
+<<<<<<< HEAD
+=======
+```{r chart2, code = readLines('chart_2.R'), echo = FALSE}
+=======
+## Plot 2: Point Differentials When Home Team Is Favored vs. Not Favored
+
+```{r plot2test, code = readLines('chart_2.R'), echo = FALSE}
+>>>>>>> 41e289389a59ade63558d7988bf43451368cd168
+```
+>>>>>>> 91e39abbd95723d4df9f2e0f9bb55004b2e3b061
 
 This chart aims to compare how different the outcomes are when home teams are favored vs when they are not. We can clearly see in the chart that when home teams are favorites, they win by a larger margin and lose by a smaller margin. It also seems like the distribution of when the home teams aren't favorites seem similar as seen in the boxplot shape. Overall, we can see a clear difference between the two groups.
 
-## *Chart 3 Title*
+## *Plot 3 Title*
 ```{r chart3}
 ```
 
