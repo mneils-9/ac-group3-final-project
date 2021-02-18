@@ -1,5 +1,5 @@
 ---
-title: "COVID 19's Affect on 2020 NFL sports betting"
+title: "COVID 19's Effect on 2020 NFL sports betting"
 author: "INFO 201 Lab AC Group 3"
 date: "2/13/2020"
 output: html_document

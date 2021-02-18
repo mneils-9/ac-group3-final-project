@@ -24,7 +24,6 @@ plot1 <- ggplot(data = yearly_projection_accuracy) +
               color = "#D50A0A", method = "loess", formula = y ~x) +
   theme_minimal() +
   labs(
-    title = "The Average Percent Accuracy of Projected Favorites by Season",
     x = "Season (Year)",
     y = "Percent Accuracy"
   )
