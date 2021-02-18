@@ -38,8 +38,12 @@ knitr::kable(summarytable)
 ```
 
 ## Plot 1: The Average Percent Accuracy of Projected Favorites by Season
+<<<<<<< HEAD
+
+=======
 ```{r plot1, code = readLines('chart_1.R'), echo = FALSE}
 ```
+>>>>>>> 96974652d61c0362d17892f4dc4efda343a8ef58
 
 ## Chart 2: Point Differentials When Home Team Is Favored vs. Not Favored
 
