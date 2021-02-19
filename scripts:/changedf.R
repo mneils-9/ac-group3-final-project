@@ -27,8 +27,8 @@ for (i in 1:nrow(scores_df)) {
   if (scores_df$team_favorite_id[i] == "PICK") {
     scores_df$team_favorite[i] <- "PICK"
   } else {
-    team <- teams %>% 
-      filter(team_id == scores_df$team_favorite_id[i]) %>% 
+    team <- teams %>%
+      filter(team_id == scores_df$team_favorite_id[i]) %>%
       select(team_name)
     if (is.list(team)) {
       if (scores_df$team_home[i] %in% team) {
@@ -60,11 +60,24 @@ scores_df <- mutate(scores_df, favorite_cover = NA)
 for (i in 1:nrow(scores_df)) {
   if (scores_df$favorite_win[i]) {
     if (scores_df$team_win[i] == scores_df$team_home[i]) {
-      scores_df$favorite_cover[i] <- (scores_df$score_away[i] - scores_df$score_home[i] < scores_df$spread_favorite[i])
+      scores_df$favorite_cover[i] <- (scores_df$score_away[i] - scores_df$score_home[i]
+                                      < scores_df$spread_favorite[i])
     } else {
-      scores_df$favorite_cover[i] <- (scores_df$score_home[i] - scores_df$score_away[i] < scores_df$spread_favorite[i])
+      scores_df$favorite_cover[i] <- (scores_df$score_home[i] - scores_df$score_away[i]
+                                      < scores_df$spread_favorite[i])
     }
   } else {
     scores_df$favorite_cover[i] <- F
+  }
+}
+
+# New column for percent accuracy
+scores_df <- mutate(scores_df, percent_accuracy = NA)
+for (i in 1:nrow(scores_df)) {
+  if (scores_df$favorite_win[i]) {
+    scores_df$percent_accuracy[i] <- 100
+  }
+  else {
+    scores_df$percent_accuracy[i] <- 0
   }
 }
