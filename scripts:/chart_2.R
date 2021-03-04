@@ -2,7 +2,8 @@
 # is favored?
 library(tidyverse)
 
-source("changedf.R")
+scores_df <- read.csv("../data:/scoresspread.csv")
+
 scores_df %>%
   mutate(home_favorite = team_favorite == team_home) %>%
   ggplot(aes(x = home_favorite, y = abs(score_home - score_away),
