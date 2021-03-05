@@ -1,4 +1,5 @@
 library(shiny)
+library(shinythemes)
 
 scores_df <- read.csv("../data:/scoresspread.csv")
 
@@ -28,15 +29,27 @@ spread_slider <- sliderInput(
   inputId = "spread_slider",
   max = max(scores_df$spread_favorite),
   min = min(scores_df$spread_favorite),
-  value = c(-3,-7),
+  value = -3,
   label = "Spread"
+)
+
+week_input <- checkboxGroupInput(
+  inputId = "week_input",
+  choices = mixedsort(unique(scores_df$schedule_week)),
+  label = "Week"
+)
+
+year_input <- selectInput(
+  inputId = "year_input",
+  choices = sort(unique(scores_df$schedule_season)),
+  label = "Season"
 )
 
 page_one <- tabPanel(
   "Introduction",
   titlePanel("Introduction"),
   mainPanel(
-    p("intro stuff")
+    p("intro stuff"),
   )
 )
 
@@ -62,7 +75,7 @@ page_three <- tabPanel(
     ),
     mainPanel(
       # splitLayout(cellWidths = c("50%", "50%"), plotlyOutput("plottest4"), plotlyOutput("plottest5"))
-      plotlyOutput("spreadslider_plot")
+      plotlyOutput("propspreadcover_plot")
     )
   )
 )
@@ -81,18 +94,47 @@ page_four <- tabPanel(
 )
 
 page_five <- tabPanel(
-  "Conclusion",
-  titlePanel("Conclusion")
+  "Finishing Thoughts",
+  titlePanel("Finishing Thoughts")
 )
+
+dropdownmenu <- navbarMenu(
+  "More",
+  "----",
+  "Section header",
+  tabPanel("Table")
+)
+
+page_test <- tabPanel(
+  "Test Page",
+  wellPanel(
+    fluidRow(
+      column(7,
+             wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 720px;",
+                       plotlyOutput("overunder_plot", height = 680)
+             )
+      ),
+      column(5,
+             wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 350px;",
+                       p("This plokt does...")),  
+             wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 350px;",
+                       p("stuff stuff stuff")))
+    )
+  )
+)
+
+
 
 ui <- fluidPage(
   navbarPage(
-    "NFL Betting 2020",
+    theme = shinytheme('flatly'),
+    tags$div(tags$img(src='nfllogo.png', width = 64, height = 88, style="float:left; margin-left: 5px; margin-right: 5px; margin-top: -10px")), 
     page_one,         
     page_two,
     page_three,
     page_four,
-    page_five
+    page_five,
+    page_test
   )
 )
 
