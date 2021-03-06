@@ -25,12 +25,19 @@ ht_input <- selectInput(
   label = "2020 Season"
 )
 
-spread_slider <- sliderInput(
+spread_slider <- knobInput(
   inputId = "spread_slider",
-  max = max(scores_df$spread_favorite),
-  min = min(scores_df$spread_favorite),
+  label = "Spread",
   value = -3,
-  label = "Spread"
+  min = min(scores_df$spread_favorite),
+  max = max(scores_df$spread_favorite),
+  step = 0.5,
+  thickness = 0.4,
+  rotation = "anticlockwise",
+  displayPrevious = TRUE,
+  lineCap = "default",
+  fgColor = "#2C3E50",
+  inputColor = "#2C3E50"
 )
 
 week_input <- checkboxGroupInput(
@@ -46,10 +53,13 @@ year_input <- selectInput(
 )
 
 page_one <- tabPanel(
-  "Introduction",
+  "Introduction", 
+  icon = icon("i", "fa-info-circle"),
   titlePanel("Introduction"),
-  mainPanel(
-    p("intro stuff"),
+  wellPanel(style = "background: #fff",
+    fluidRow(
+      p("intro stuff"),
+    )
   )
 )
 
@@ -68,16 +78,31 @@ page_two <- tabPanel(
 
 page_three <- tabPanel(
   "Interactive Visuals Part 2",
-  titlePanel("Interactive Visuals Part 2"),
-  sidebarLayout(
-    sidebarPanel(
-      spread_slider
-    ),
-    mainPanel(
-      # splitLayout(cellWidths = c("50%", "50%"), plotlyOutput("plottest4"), plotlyOutput("plottest5"))
-      plotlyOutput("propspreadcover_plot")
-    )
+  wellPanel(style = "background: #fff",
+            fluidRow(
+              column(1),
+              column(3,
+                     div(style = "font-size: 10px; padding: 14px; margin-left: 100px; margin-top: 60px"),
+                     spread_slider,
+                     
+              ),
+              column(6,
+                     wellPanel(style = "background-color: #CACFD3; border-color: #cbcbcb; padding: 4px; width: 800px; height: 410px;",
+                               plotOutput("spreadyears_plot")
+                     )
+              )
+            )
+  ),
+  wellPanel(style = "background: #fff",
+            fluidRow(
+              wellPanel(
+                style = "background-color: #CACFD3; border-color: #cbcbcb; padding: 4px; width: 800px; height: 410px;",
+                plotOutput("spreadcomp_plot")
+          
+              )
+            )
   )
+  
 )
 
 page_four <- tabPanel(
@@ -95,6 +120,7 @@ page_four <- tabPanel(
 
 page_five <- tabPanel(
   "Finishing Thoughts",
+  icon = icon("i", "fa-check-square"),
   titlePanel("Finishing Thoughts")
 )
 
@@ -116,19 +142,21 @@ page_test <- tabPanel(
       ),
       column(5,
              wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 350px;",
-                       p("This plokt does...")),  
+                       plotlyOutput("ouscorep_plot", height = 320)),  
              wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 350px;",
-                       p("stuff stuff stuff")))
+                       p("stuff stuff stuff"))
+             )
     )
   )
 )
 
-
-
 ui <- fluidPage(
   navbarPage(
     theme = shinytheme('flatly'),
-    tags$div(tags$img(src='nfllogo.png', width = 64, height = 88, style="float:left; margin-left: 5px; margin-right: 5px; margin-top: -10px")), 
+    tags$div(tags$img(src='nfllogo.png', width = 29, height = 40, style="float:left; margin-left: 5px; margin-right: 10px; margin-top: -10px"), tags$style(HTML("
+      body {
+        background-color: #CACFD3;
+      }"))), 
     page_one,         
     page_two,
     page_three,
@@ -137,4 +165,3 @@ ui <- fluidPage(
     page_test
   )
 )
-

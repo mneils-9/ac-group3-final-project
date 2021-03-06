@@ -5,6 +5,7 @@ library(plotly)
 library(viridis)
 library(hrbrthemes)
 library(gtools)
+library(shinyWidgets)
 
 scores_df <- read.csv("../data:/scoresspread.csv")
 o_histdf <- read.csv("../data:/offensehistory.csv")
@@ -118,15 +119,59 @@ server <- function(input, output) {
     ggplotly(plot)
   })
   
+  output$spreadyears_plot <- renderPlot({
+    plot <- scores_df %>% 
+      filter(input$spread_slider == spread_favorite) %>% 
+      group_by(schedule_season, favorite_cover) %>% 
+      summarize(count = n()) %>% 
+      ggplot() +
+      geom_bar(mapping = aes(x = schedule_season, y = count, fill = favorite_cover), position="stack",  stat = "identity")  +
+      scale_fill_manual(name = "", labels = c("Favorite Didn't Cover Spread", "Favorite Covered Spread"), values = c("FALSE" = "#2C3E50", "TRUE" = "#939DA5")) +
+      theme_ipsum() +
+      theme(legend.position = "top")
+    plot
+  })
+  
   output$overunder_plot <- renderPlotly({
     plot <- scores_df %>% 
       filter(schedule_season >= 1980) %>% 
       group_by(schedule_season) %>% 
       summarize(ou = mean(over_under_line, na.rm = T), total = mean(score_home + score_away, na.rm = T)) %>% 
       ggplot(aes(x = schedule_season)) +
-      geom_line(aes(y = ou), color = "#20A387FF") +
-      geom_line(aes(y = total), color = "#482677FF") +
+      geom_line(aes(y = ou), color = "#2C3E50") +
+      geom_line(aes(y = total), color = "#939DA5") +
+      theme_ipsum() 
+    ggplotly(plot)
+  })
+  
+  output$spreadcomp_plot <- renderPlot({
+    plot <- scores_df %>% 
+      mutate(is2020 = schedule_season == 2020) %>% 
+      group_by(schedule_season, spread_favorite) %>% 
+      summarize(count = n(), is2020) %>% 
+      group_by(is2020, spread_favorite) %>% 
+      summarize(avg = mean(count)) %>% 
+      ggplot(aes(x = spread_favorite)) +
+      geom_bar(aes(y = avg, fill = is2020), stat = "identity", position = position_dodge()) +
+      scale_fill_manual(name = "", labels = c("1966-2019", "2020"), values = c("FALSE" = "#2C3E50", "TRUE" = "#939DA5")) + 
+      labs(x = "Spread", y = "Count") +
+      theme_ipsum() +
+      theme(legend.position = "top")
+    plot
+  })
+  
+  output$ouscorep_plot <- renderPlotly({
+    avgou <- scores_df %>% 
+      group_by(schedule_season) %>% 
+      summarize(ou = mean(over_under_line, na.rm = T))
     
+    avgou <- left_join(o_histdf %>% select(year, scoreperc), avgou, by = c("year" = "schedule_season")) 
+    
+    plot <- avgou %>% 
+      filter(year >= 1998) %>% 
+      ggplot(aes(x = year)) +
+      geom_line(aes(y = ou)) +
+      geom_line(aes(y= scoreperc)) +
       theme_ipsum()
     ggplotly(plot)
   })
