@@ -176,6 +176,16 @@ server <- function(input, output) {
     ggplotly(plot)
   })
   
+  output$pointmargin_plot <- renderPlotly({
+    plot <- scores_df %>%
+      mutate(margin = abs(score_home - score_away)) %>% 
+      ggplot() + 
+      geom_histogram(aes(x = schedule_season, y = margin, fill = favorite_win)) +
+      theme_ipsum()
+    
+    ggplotly(plot)
+  })
+  
   output$table <- renderTable({
     o_histdf %>% 
       group_by(year) %>% 

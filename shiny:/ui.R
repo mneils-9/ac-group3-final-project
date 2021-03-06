@@ -56,8 +56,8 @@ page_one <- tabPanel(
   "Introduction", 
   icon = icon("i", "fa-info-circle"),
   titlePanel("Introduction"),
-  wellPanel(style = "background: #fff",
-    fluidRow(
+  wellPanel(style = "background: #fff;",
+    fluidRow(style = "padding: 30px",
       h2("Domain"),
       p("We chose to look at sports betting in the NFL, which is the practice of placing wagers on football players and games. There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in National Football League (NFL) betting, especially how the COVID 19 pandemic has affected football betting and team play."),
       h2("Key Terms"),
@@ -68,7 +68,7 @@ page_one <- tabPanel(
       p(strong("Over Under"), "- the expected total number of points scored by both teams in the given game. People can either bet on the over (going to go over the expected total) or the under (going under the expected total)."),
       p(em("E.g."), "he super bowl between the Chiefs and the Buccaneers this year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 57.7. This means that the Chiefs were favored by 3.5 points, and they had to win by 3.5 points or else they wouldn't cover the spread. The Buccaneers on the other hand, could lose by less than 3.5 points or just win to cover the spread. The Buccaneers came out on top 31-9, so Chiefs didn't cover and the game went under since the total points scored was under 57.7."),
       h2("Summary Information")
-    )
+    ),
   )
 )
 
@@ -154,7 +154,7 @@ page_test <- tabPanel(
              wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 350px;",
                        plotlyOutput("ouscorep_plot", height = 320)),  
              wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 350px;",
-                       p("stuff stuff stuff"))
+                       plotlyOutput("pointmargin_plot", height = 320))
              )
     )
   )

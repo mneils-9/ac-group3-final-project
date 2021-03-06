@@ -1,6 +1,6 @@
 library(tidyverse)
 
-source("changedf.R")
+scores_df <- read.csv("../data:/scoresspread.csv")
 
 summarytable <- scores_df %>%
   filter(team_favorite == team_home) %>%
