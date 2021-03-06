@@ -1,7 +1,7 @@
 # ac-group3-final-project
 
 ## Domain: Sports Betting in the NFL
-We chose to look at sports betting in the NFL, which is the practice of placing wagers on football players and games. There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in National Football League (NFL) betting, especially how the COVID 19 pandemic has affected football bets.
+We chose to look at sports betting in the NFL, which is the practice of placing wagers on football players and games. There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in National Football League (NFL) betting, especially how the COVID 19 pandemic has affected football betting and team play.
 
 ## Other Examples of Data Driven Projects in this Domain
 
@@ -29,7 +29,7 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
 
 ## Finding Data
 
-- Attendance dataset 2020 (attendance2020.csv)
+- NFL Attendance 2020 (https://www.pro-football-reference.com/years/2020/attendance.htm#attendance)
 
   - We were able to download this dataset from pro-football-reference, which is a very reputable source for NFL data.
 
@@ -50,5 +50,29 @@ This [page](https://projects.fivethirtyeight.com/2020-nfl-predictions/) by _five
   - There are 106 rows in the dataset.
 
   - There are 40 columns in this dataset.
- 
-  - This data can help us answer how did the betting change in the 2020 season compared to the past seasons. 
+
+  - This data can help us answer how did the betting change in the 2020 season compared to the past seasons.
+
+- NFL Team Cash Payroll Tracker (https://www.spotrac.com/nfl/cash/)
+
+  - We were able to discover this dataset from Spotrac, which has become  the largest and most reliable online sports team & player contract resource on the internet.
+
+  - This data is collected by dara development and research team. This data set on the website currently boasts financial information for MLB, the NBA, NFL, NHL, and MLS.
+
+  - There are 30 rows in the dataset for each year.
+
+  - There are 4 colums in the dataset for each year.
+
+  - This data can help us answer how did the pandemic affect player salaries.
+  
+- NFL Penalties 2020 (https://www.nflpenalties.com/)
+
+  - We were able to download this data from nfllpenalties.
+
+  - They retrieve their data from nflfastR, which is a known source for getting NFL play by play data. The creators of nflfastR are also the creators of the [web application](https://rbsdm.com/stats/stats/) mentioned above.
+
+  - There are 33 rows in the dataset.
+
+  - There are 15 columns in the dataset.
+
+  - This can help us further explore if fans can affect the game.
