@@ -49,7 +49,7 @@ This plot is intended to show the relationship between the average percent accur
 
 This plot aims to compare how different the outcomes are when home teams are favored vs when they are not. We can clearly see in the chart that when home teams are favorites, they win by a larger margin and lose by a smaller margin. It also seems like the distribution of when the home teams are not favored is similar as seen in the boxplot shape. Overall, we can see a clear difference between the two groups.
 
-## Plot 3: Top Ten Avaerage Favorite Team Home Score
+## Plot 3: Top Ten Average Favorite Team Home Score
 ```{r plot3, code = readLines('chart_3.R'), echo = FALSE}
 ```
 
