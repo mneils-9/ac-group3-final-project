@@ -220,7 +220,45 @@ page_four <- tabPanel(
 page_five <- tabPanel(
   "Finishing Thoughts",
   icon = icon("i", "fa-check-square"),
-  titlePanel("Finishing Thoughts")
+  titlePanel("Finishing Thoughts"),
+  wellPanel(style = "background: #fff;",
+            fluidRow(style = "padding: 30px"),
+            h4("Reflections"),
+            p("Maddie: I analyzed how the accuracy of projected favorites changed 
+              in the 2020 season. In Interactive Visuals Part 1 I explore NFL 
+              betting accuracy which has consistently been around 60% accurate 
+              for the more recent seasons that we have a complete set of data 
+              for where all season's games are reported. Looking specifically at 
+              the 2020 season, we can see that here was no significant change in 
+              the accuracy of predicting winners, as it is around 63% accurate. 
+              Knowing that the 2020 NFL season was shaken up due to the COVID 19
+              pandemic, it is suprising that sports bets continue to be 
+              relatively accurate."),
+            h4("After completing this project, we have come up with important 
+               insights for people who are interested in betting on NFL games. 
+               Using knowledge gained from this project, potential bettors are 
+               better equipped to make smart predictions about who will win a 
+               game."),
+            p("Interested in placing bets? Check out this table showing each 
+              team's average score during a home game. This will be helpful to new 
+              bettors since for each NFL game the oddsmakers set a number of points
+              in which the favorite team is favored by. By making this table it 
+              allows the bettors to see the average scores of the favorite home 
+              team and either choose for the favored team to win by more than 
+              the number of points set, or bet on the underdogs to lose by less 
+              than the number of points, it can also work the other way around 
+              as well. Therefore by figuring out the favorite team and the 
+              average score of the hometeam, it'll give us a better chance of 
+              the prediction on how much points that the bettor's team will win 
+              or lose by."),
+            br(),
+            tableOutput("aggragate_table"),
+            br(),
+            a(href ="https://www.oddsshark.com/nfl/sites", "Click to See Betting Sites"),
+            br(),
+            img(src = 'ball_money.png', alt = "Football Showered with Money"),
+  )
+  
 )
 
 dropdownmenu <- navbarMenu(
