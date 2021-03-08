@@ -78,10 +78,12 @@ page_one <- tabPanel(
         football betting and team play."),
       br(),
       br(),
-      p("This infographic shows which states have legalized sports gambling on 
+      p(em("This infographic shows which states have legalized sports gambling on 
         the map and the bar chart on the side shows the rapid growth of legal 
-        sports bets in the last few years."),
-      img(src = 'betting_infographic.PNG', alt = "US sports betting infographic"),
+        sports bets in the last few years.")),
+      img(src = 'betting_infographic.PNG', alt = "US sports betting infographic", 
+          height="50%", width="50%", align = "center"),
+      br(),
       br(),
       h2("Key Terms"),
       br(),
@@ -142,6 +144,9 @@ page_two <- tabPanel(
   titlePanel("Betting Accuracy"),
   sidebarLayout(
     sidebarPanel(
+      h4("A key aspect of sports betting is making predictions on who will win 
+         the game. In this section, we examine how those predictions stacked up 
+         with actual game outcomes."),
       "This plot is intended to show the relationship between the average percent
       accuracy of projected winners actually winning over the seasons. For the 
       first couple years of data, there are not many games recorded which results
@@ -158,7 +163,7 @@ page_two <- tabPanel(
     ),
     mainPanel(
       "The Average Percent Accuracy of Projected Favorites by Season",
-      plotOutput("bets_accuracy_plot")
+      plotlyOutput("bets_accuracy_plot")
     )
   )
 )
