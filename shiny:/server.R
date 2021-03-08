@@ -252,25 +252,21 @@ server <- function(input, output) {
       select(year, ptd, pint, rtd)
   })
   
-  output$summary <- renderText({
-    "blah blah blah"
-  })
-  
   output$bets_accuracy_plot <- renderPlotly({
     # Dataframe for % accuracy of projections by year
     projection_accuracy <- scores_df %>%
       select(schedule_season, team_favorite, team_win, favorite_win,
              percent_accuracy)
-    
+
     yearly_projection_accuracy <- projection_accuracy %>%
       group_by(schedule_season) %>%
-      summarise(mean(percent_accuracy))
+      summarise(percent_accuracy = mean(percent_accuracy))
     
     # Make plot!
     plot1 <- ggplot(data = yearly_projection_accuracy) +
-      geom_point(mapping = aes(x = schedule_season, y = `mean(percent_accuracy)`),
+      geom_point(mapping = aes(x = schedule_season, y = percent_accuracy),
                  color = "#013369") +
-      geom_smooth(mapping = aes(x = schedule_season, y = `mean(percent_accuracy)`),
+      geom_smooth(mapping = aes(x = schedule_season, y = percent_accuracy),
                   color = "#D50A0A", method = "loess", formula = y ~x) +
       theme_minimal() +
       labs(
@@ -279,5 +275,27 @@ server <- function(input, output) {
       )
     ggplotly(plot1)
     
+  })
+  
+  output$team_season_accuracy <- renderPlotly({
+    plot <- scores_df%>%
+      filter(schedule_season == input$year_input)%>%
+      filter(team_home == input$team_input)%>%
+      ggplot(aes(x =schedule_date, y = percent_accuracy))+
+      geom_bar(mapping = aes(schedule_date, percent_accuracy), 
+               color = "#013369", stat = "identity") +
+      theme_minimal()+
+      labs(x = "Game Date", y = "Accuracy of Prediction")
+    ggplotly(plot)
+      
+  })
+  
+  output$aggragate_table <- renderTable({
+    summarytable <- scores_df %>%
+      filter(team_favorite == team_home) %>%
+      group_by(team_favorite) %>%
+      summarise(average_homescore = mean(score_home))
+    
+    summarytable
   })
 }
