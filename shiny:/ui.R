@@ -57,8 +57,11 @@ page_one <- tabPanel(
   icon = icon("i", "fa-info-circle"),
   titlePanel("Introduction"),
   wellPanel(style = "background: #fff;",
-    fluidRow(style = "padding: 30px",
+    fluidRow(style = "padding: 30px", tags$head(tags$style("#container * 
+                                                           { display: inline; }")),
+      div(id="container",
       h2("Domain"),
+      br(),
       p("We chose to look at sports betting in the NFL, which is the practice of 
         placing wagers on football players and games. There is a wide range in 
         the level of participation for sports betting: from casual fans to 
@@ -74,11 +77,14 @@ page_one <- tabPanel(
         League (NFL) betting, especially how the COVID 19 pandemic has affected 
         football betting and team play."),
       br(),
+      br(),
       p("This infographic shows which states have legalized sports gambling on 
         the map and the bar chart on the side shows the rapid growth of legal 
         sports bets in the last few years."),
       img(src = 'betting_infographic.PNG', alt = "US sports betting infographic"),
+      br(),
       h2("Key Terms"),
+      br(),
       p(strong("Spread"), "- the expected point margin by which a team will win 
         or lose by. In other words, how much a team is favored by. A ", 
         em("negative"), " spread implies the team is favored by that amount. A ",
@@ -94,6 +100,7 @@ page_one <- tabPanel(
         both teams in the given game. People can either bet on the over (going 
         to go over the expected total) or the under (going under the expected 
         total)."),
+      br(),
       p(em("E.g."), "he super bowl between the Chiefs and the Buccaneers this 
         year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 
         57.7. This means that the Chiefs were favored by 3.5 points, and they 
@@ -102,7 +109,10 @@ page_one <- tabPanel(
         win to cover the spread. The Buccaneers came out on top 31-9, so Chiefs
         didn't cover and the game went under since the total points scored was 
         under 57.7."),
+      br(),
+      br(),
       h2("Summary Information"),
+      br(),
       p("Our dataset includes ", textOutput("num_obs"), " observations that contain 
         values in the favorite team and spread favorite columns. We specifically 
         chose to keep the observations with these variables since we wanted to 
@@ -123,6 +133,7 @@ page_one <- tabPanel(
       )
     ),
   )
+)
 
 
 
