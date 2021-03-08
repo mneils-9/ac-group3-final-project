@@ -10,12 +10,12 @@ library(shinyWidgets)
 scores_df <- read.csv("../data:/scoresspread.csv")
 o_histdf <- read.csv("../data:/offensehistory.csv")
 penalties_df <- read.csv("../data:/penaltiesfull.csv")
-source("/scripts/summaryinfo.R")
+source("../scripts:/summaryinfo.R")
 
 server <- function(input, output) {
   
   output$num_obs <- renderText({
-    return(summary_info$num_ob)
+    return(summary_info$num_obs)
   })
   
   output$num_unique_years <- renderText({

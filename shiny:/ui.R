@@ -77,7 +77,7 @@ page_one <- tabPanel(
       p("This infographic shows which states have legalized sports gambling on 
         the map and the bar chart on the side shows the rapid growth of legal 
         sports bets in the last few years."),
-      img(source = 'betting_infographic.PNG', alt = "US sports betting infographic"),
+      img(src = 'betting_infographic.PNG', alt = "US sports betting infographic"),
       h2("Key Terms"),
       p(strong("Spread"), "- the expected point margin by which a team will win 
         or lose by. In other words, how much a team is favored by. A ", 
@@ -103,22 +103,22 @@ page_one <- tabPanel(
         didn't cover and the game went under since the total points scored was 
         under 57.7."),
       h2("Summary Information"),
-      p("Our dataset includes ", textOutput(num_obs), " observations that contain 
+      p("Our dataset includes ", textOutput("num_obs"), " observations that contain 
         values in the favorite team and spread favorite columns. We specifically 
         chose to keep the observations with these variables since we wanted to 
         study the trend of the betting. This turned out to be around ", 
-        textOutput(num_unique_years), "seasons worth of data with ", 
-        textOutput(num_different_teams), " different teams. Thus, ignoring the 
+        textOutput("num_unique_years"), "seasons worth of data with ", 
+        textOutput("num_different_teams"), " different teams. Thus, ignoring the 
         rows without spread data, the smallest spread 
-        turned out to be ", textOutput(favorite_min_spread), " , which which is 
+        turned out to be ", textOutput("favorite_min_spread"), " , which which is 
         also considered a 50/50 game or a tossup. Our biggest spread turned out 
-        to be ", textOutput(favorite_max_spread), " which is considered to be a 
+        to be ", textOutput("favorite_max_spread"), " which is considered to be a 
         very one sided game. However,our mean turned out to be ", 
-        textOutput(favorite_spread_mean), " which was much closer to a 50/50 
+        textOutput("favorite_spread_mean"), " which was much closer to a 50/50 
         game than a one sided game. We also found that the proportion of 
-        home teams that were favored was ", textOutput(prop_home_favorite), " 
+        home teams that were favored was ", textOutput("prop_home_favorite"), " 
         and of the home favorites we found the proportion to cover the spread 
-        to be ", textOutput(prop_home_favorite_cover) )
+        to be ", textOutput("prop_home_favorite_cover") )
         
       )
     ),
