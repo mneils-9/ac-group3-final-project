@@ -12,6 +12,12 @@ o_histdf <- read.csv("../data:/offensehistory.csv")
 penalties_df <- read.csv("../data:/penaltiesfull.csv")
 source("../scripts:/summaryinfo.R")
 
+week_ordered <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "Wildcard", "Division", "Conference", "Superbowl")
+
+order_week <- function(list) {
+  week_ordered[week_ordered %in% list]
+}
+
 server <- function(input, output) {
   
   output$num_obs <- renderText({
@@ -214,6 +220,27 @@ server <- function(input, output) {
       mutate(margin = abs(score_home - score_away)) %>% 
       ggplot() + 
       geom_histogram(aes(x = schedule_season, y = margin, fill = favorite_win)) +
+      theme_ipsum()
+    
+    ggplotly(plot)
+  })
+  
+  output$ouchange_plot <- renderPlotly({
+    pgquant <- scores_df %>% 
+      filter(schedule_season == input$year_input) %>% 
+      group_by(schedule_week) %>% 
+      summarize(avg = mean(over_under_line)) 
+    pgquant$schedule_week[pgquant$schedule_week == "Wildcard"] <- 19
+    pgquant$schedule_week[pgquant$schedule_week == "Division"] <- 20
+    pgquant$schedule_week[pgquant$schedule_week == "Conference"] <- 21
+    pgquant$schedule_week[pgquant$schedule_week == "Superbowl"] <- 22
+    
+    pgquant <- pgquant %>% 
+      mutate(schedule_week = as.numeric(schedule_week))
+    
+    plot <- pgquant %>% 
+      ggplot() +
+      geom_line(aes(x = schedule_week, y = avg)) +
       theme_ipsum()
     
     ggplotly(plot)

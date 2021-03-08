@@ -56,8 +56,8 @@ page_one <- tabPanel(
   "Introduction", 
   icon = icon("i", "fa-info-circle"),
   titlePanel("Introduction"),
-  wellPanel(style = "background: #fff;",
-    fluidRow(style = "padding: 30px", tags$head(tags$style("#container * 
+  wellPanel(style = "background: #fff; margin-top: 50px",
+    fluidRow(style = "padding: 20px; margin-top: -10px", tags$head(tags$style("#container * 
                                                            { display: inline; }")),
       div(id="container",
       h2("Domain"),
@@ -81,6 +81,7 @@ page_one <- tabPanel(
       p("This infographic shows which states have legalized sports gambling on 
         the map and the bar chart on the side shows the rapid growth of legal 
         sports bets in the last few years."),
+      br(),
       img(src = 'betting_infographic.PNG', alt = "US sports betting infographic"),
       br(),
       h2("Key Terms"),
@@ -135,8 +136,6 @@ page_one <- tabPanel(
   )
 )
 
-
-
 page_two <- tabPanel(
   "Interactive Visuals Part 1", 
   titlePanel("Betting Accuracy"),
@@ -164,7 +163,8 @@ page_two <- tabPanel(
 )
 
 page_three <- tabPanel(
-  "Interactive Visuals Part 2",
+  "Uncertainty in the Over/Under",
+  titlePanel("Uncertainty in the Over/Under"),
   wellPanel(style = "background: #fff",
             fluidRow(
               column(1),
@@ -185,7 +185,26 @@ page_three <- tabPanel(
               wellPanel(
                 style = "background-color: #CACFD3; border-color: #cbcbcb; padding: 4px; width: 800px; height: 410px;",
                 plotOutput("spreadcomp_plot")
-          
+                
+              )
+            )
+  ),
+  wellPanel(style = "background: #fff",
+            fluidRow(                                      
+              column(3,
+                     wellPanel(
+                       div(style = "font-size: 10px; padding: 14px; margin-left: 100px; margin-top: 60px"),
+                       year_input
+                     ),
+
+              ),
+              wellPanel(                style = "background-color: #CACFD3; border-color: #cbcbcb; padding: 4px; width: 800px; height: 410px;",
+
+                                        column(6,
+                                               plotlyOutput("ouchange_plot")
+                                               
+                                        )
+                                        
               )
             )
   )
