@@ -147,7 +147,7 @@ page_two <- tabPanel(
       h4("A key aspect of sports betting is making predictions on who will win 
          the game. In this section, we examine how those predictions stacked up 
          with actual game outcomes."),
-      "This plot is intended to show the relationship between the average percent
+      p("This first plot is intended to show the relationship between the average percent
       accuracy of projected winners actually winning over the seasons. For the 
       first couple years of data, there are not many games recorded which results
       in outliers where the percent accuracy is either 100% or 0%. From the year
@@ -159,11 +159,18 @@ page_two <- tabPanel(
       2020 season due to the COVID 19 pandemic and an adjusted season. In the 
       plot, we can see that there was no significant change in the accuracy of 
       predicting winners, as the point for 2020 percent accuracy lies within the
-      expected values represented by the shadow of the trend line."
+      expected values represented by the shadow of the trend line."),
+      br(),
+      p("This second plot allows you to choose a team and a season year to see 
+        how well bettors are able to predict game outcomes for home games."),
+      team_input,
+      year_input
     ),
     mainPanel(
       "The Average Percent Accuracy of Projected Favorites by Season",
-      plotlyOutput("bets_accuracy_plot")
+      plotlyOutput("bets_accuracy_plot"),
+      "A Team's Percent Accuracy in a Given Season",
+      plotlyOutput("team_season_accuracy")
     )
   )
 )

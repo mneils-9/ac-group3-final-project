@@ -249,4 +249,17 @@ server <- function(input, output) {
     ggplotly(plot1)
     
   })
+  
+  output$team_season_accuracy <- renderPlotly({
+    plot <- scores_df%>%
+      filter(schedule_season == input$year_input)%>%
+      filter(team_home == input$team_input)%>%
+      ggplot(aes(x =schedule_date, y = percent_accuracy))+
+      geom_bar(mapping = aes(schedule_date, percent_accuracy), 
+               color = "#013369", stat = "identity") +
+      theme_minimal()+
+      labs(x = "Game Date", y = "Accuracy of Prediction")
+    ggplotly(plot)
+      
+  })
 }
