@@ -128,13 +128,26 @@ page_one <- tabPanel(
 
 page_two <- tabPanel(
   "Interactive Visuals Part 1", 
-  titlePanel("Interactive Visuals Part 1"),
+  titlePanel("Betting Accuracy"),
   sidebarLayout(
     sidebarPanel(
-      "Side stuff"
+      "This plot is intended to show the relationship between the average percent
+      accuracy of projected winners actually winning over the seasons. For the 
+      first couple years of data, there are not many games recorded which results
+      in outliers where the percent accuracy is either 100% or 0%. From the year
+      1980 and beyond, we can see a general trend represented with the red trend
+      line of a percent accuracy around 60%. This means that for each season,
+      where there are multiple games played, the average accuracy of the 
+      projected favorite team winning is about 60%. This plot is answering the
+      question of whether the accuracy of projected favorites changed for the 
+      2020 season due to the COVID 19 pandemic and an adjusted season. In the 
+      plot, we can see that there was no significant change in the accuracy of 
+      predicting winners, as the point for 2020 percent accuracy lies within the
+      expected values represented by the shadow of the trend line."
     ),
     mainPanel(
-      "Main stuff"
+      "The Average Percent Accuracy of Projected Favorites by Season",
+      plotOutput("bets_accuracy_plot")
     )
   )
 )
