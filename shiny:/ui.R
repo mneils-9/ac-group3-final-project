@@ -59,18 +59,71 @@ page_one <- tabPanel(
   wellPanel(style = "background: #fff;",
     fluidRow(style = "padding: 30px",
       h2("Domain"),
-      p("We chose to look at sports betting in the NFL, which is the practice of placing wagers on football players and games. There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in National Football League (NFL) betting, especially how the COVID 19 pandemic has affected football betting and team play."),
+      p("We chose to look at sports betting in the NFL, which is the practice of 
+        placing wagers on football players and games. There is a wide range in 
+        the level of participation for sports betting: from casual fans to 
+        serious money-making fanatics. Regardless of motivations, all sports 
+        bets follow three simple steps: selection, stakes, and odds. The most 
+        popular types of sports bets are on point spreads and totals, where 
+        people often use statistics to decide on their bet and then wait for the
+        game to be played to see the outcome. Betting is always a gamble, and 
+        sports betting involves necessary risk. Sports betting often happens 
+        online, which is where this project is focusing. We choose this domain 
+        because of a shared interest in sports, and curiosity about the world of
+        football betting. This project will examine trends in National Football 
+        League (NFL) betting, especially how the COVID 19 pandemic has affected 
+        football betting and team play."),
+      br(),
+      p("This infographic shows which states have legalized sports gambling on 
+        the map and the bar chart on the side shows the rapid growth of legal 
+        sports bets in the last few years."),
+      img(source = 'betting_infographic.PNG', alt = "US sports betting infographic"),
       h2("Key Terms"),
-      p(strong("Spread"), "- the expected point margin by which a team will win or lose by. In other words, how much a team is favored by. A ", em("negative"), " spread implies the team is favored by that amount. A ", em("positive")," spread implies the team is the underdog by that amount." ),
+      p(strong("Spread"), "- the expected point margin by which a team will win 
+        or lose by. In other words, how much a team is favored by. A ", 
+        em("negative"), " spread implies the team is favored by that amount. A ",
+        em("positive")," spread implies the team is the underdog by that amount." ),
       br(),
-      p(strong("Cover the spread"), "- the underdog/favored team was able to win/lose by the certain threshold. An underdog team can either lose by the number of points set in the spread or less and cover the spread. In other words, the underdog is given a handicap. However, the favored team ", em("has"), " to win by the given spread or they will not cover the spread."),
+      p(strong("Cover the spread"), "- the underdog/favored team was able to 
+        win/lose by the certain threshold. An underdog team can either lose by 
+        the number of points set in the spread or less and cover the spread. In 
+        other words, the underdog is given a handicap. However, the favored team ",
+        em("has"), " to win by the given spread or they will not cover the spread."),
       br(),
-      p(strong("Over Under"), "- the expected total number of points scored by both teams in the given game. People can either bet on the over (going to go over the expected total) or the under (going under the expected total)."),
-      p(em("E.g."), "he super bowl between the Chiefs and the Buccaneers this year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 57.7. This means that the Chiefs were favored by 3.5 points, and they had to win by 3.5 points or else they wouldn't cover the spread. The Buccaneers on the other hand, could lose by less than 3.5 points or just win to cover the spread. The Buccaneers came out on top 31-9, so Chiefs didn't cover and the game went under since the total points scored was under 57.7."),
-      h2("Summary Information")
+      p(strong("Over Under"), "- the expected total number of points scored by 
+        both teams in the given game. People can either bet on the over (going 
+        to go over the expected total) or the under (going under the expected 
+        total)."),
+      p(em("E.g."), "he super bowl between the Chiefs and the Buccaneers this 
+        year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 
+        57.7. This means that the Chiefs were favored by 3.5 points, and they 
+        had to win by 3.5 points or else they wouldn't cover the spread. The 
+        Buccaneers on the other hand, could lose by less than 3.5 points or just
+        win to cover the spread. The Buccaneers came out on top 31-9, so Chiefs
+        didn't cover and the game went under since the total points scored was 
+        under 57.7."),
+      h2("Summary Information"),
+      p("Our dataset includes ", textOutput(num_obs), " observations that contain 
+        values in the favorite team and spread favorite columns. We specifically 
+        chose to keep the observations with these variables since we wanted to 
+        study the trend of the betting. This turned out to be around ", 
+        textOutput(num_unique_years), "seasons worth of data with ", 
+        textOutput(num_different_teams), " different teams. Thus, ignoring the 
+        rows without spread data, the smallest spread 
+        turned out to be ", textOutput(favorite_min_spread), " , which which is 
+        also considered a 50/50 game or a tossup. Our biggest spread turned out 
+        to be ", textOutput(favorite_max_spread), " which is considered to be a 
+        very one sided game. However,our mean turned out to be ", 
+        textOutput(favorite_spread_mean), " which was much closer to a 50/50 
+        game than a one sided game. We also found that the proportion of 
+        home teams that were favored was ", textOutput(prop_home_favorite), " 
+        and of the home favorites we found the proportion to cover the spread 
+        to be ", textOutput(prop_home_favorite_cover) )
+        
+      )
     ),
   )
-)
+
 
 
 page_two <- tabPanel(

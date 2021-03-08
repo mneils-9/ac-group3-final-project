@@ -10,8 +10,41 @@ library(shinyWidgets)
 scores_df <- read.csv("../data:/scoresspread.csv")
 o_histdf <- read.csv("../data:/offensehistory.csv")
 penalties_df <- read.csv("../data:/penaltiesfull.csv")
+source("/scripts/summaryinfo.R")
 
 server <- function(input, output) {
+  
+  output$num_obs <- renderText({
+    return(summary_info$num_ob)
+  })
+  
+  output$num_unique_years <- renderText({
+    return(summary_info$num_unique_years)
+  })
+  
+  output$num_different_teams <- renderText({
+    return(summary_info$num_different_teams)
+  })
+  
+  output$favorite_min_spread <- renderText({
+    return(summary_info$favorite_min_spread)
+  })
+  
+  output$favorite_max_spread <- renderText({
+    return(summary_info$favorite_max_spread)
+  })
+  
+  output$favorite_spread_mean <- renderText({
+    return(summary_info$favorite_spread_mean)
+  })
+  
+  output$prop_home_favorite <- renderText({
+    return(summary_info$prop_home_favorite)
+  })
+  
+  output$prop_home_favorite_cover <- renderText({
+    return(summary_info$prop_home_favorite_cover)
+  })
   
   output$teamcover_boxplot <- renderPlotly({
     plot <- scores_df %>% 
