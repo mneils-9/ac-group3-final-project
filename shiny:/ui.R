@@ -162,7 +162,8 @@ page_two <- tabPanel(
       expected values represented by the shadow of the trend line."),
       br(),
       p("This second plot allows you to choose a team and a season year to see 
-        how well bettors are able to predict game outcomes for home games."),
+        how well bettors are able to predict game outcomes for home games. *Tip: 
+        more recent seasons have more data!"),
       team_input,
       year_input
     ),
@@ -234,6 +235,7 @@ page_five <- tabPanel(
               Knowing that the 2020 NFL season was shaken up due to the COVID 19
               pandemic, it is suprising that sports bets continue to be 
               relatively accurate."),
+            br(),
             h4("After completing this project, we have come up with important 
                insights for people who are interested in betting on NFL games. 
                Using knowledge gained from this project, potential bettors are 
