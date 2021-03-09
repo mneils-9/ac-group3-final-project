@@ -235,6 +235,7 @@ server <- function(input, output) {
     ggplotly(plot)
   })
   
+  # Kobe: Using
   output$ou_boxplot <- renderPlotly({
     ifelse(input$playoff_input, ou_df <- scores_df, ou_df <- scores_df %>% filter(schedule_playoff == FALSE))
     
@@ -258,6 +259,7 @@ server <- function(input, output) {
     ggplotly(plot)
   })
   
+  # Kobe: Might use
   output$ouchange_plot <- renderPlotly({
     ifelse(input$playoff_input, pgquant <- scores_df, pgquant <- scores_df %>% filter(schedule_playoff == FALSE))
     pgquant <- pgquant %>% 
@@ -279,6 +281,7 @@ server <- function(input, output) {
     ggplotly(plot)
   })
   
+  # Kobe: might use
   output$propover_plot <- renderPlotly({
     plot <- scores_df %>% 
       filter(schedule_season == input$year_input2) %>% 

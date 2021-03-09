@@ -222,7 +222,9 @@ page_three <- tabPanel(
     ),
     
     mainPanel(style = "margin-top: 10px",
-      plotlyOutput("ou_boxplot")
+              wellPanel(style = "padding: 4px",
+                plotlyOutput("ou_boxplot")
+              )
     )
   )
 )
@@ -247,8 +249,7 @@ page_five <- tabPanel(
   style = "margin-top: -20px",
   icon = icon("i", "fa-check-square"),
   titlePanel("Finishing Thoughts"),
-  wellPanel(style = "background: #fff;",
-            fluidRow(style = "padding: 30px"),
+  wellPanel(style = "background: #ecf0f1; margin-top: 20px",
             h4("Reflections"),
             p("Maddie: I analyzed how the accuracy of projected favorites changed 
               in the 2020 season. In Interactive Visuals Part 1 I explore NFL 
