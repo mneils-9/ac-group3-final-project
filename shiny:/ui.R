@@ -52,15 +52,29 @@ year_input <- selectInput(
   label = "Season"
 )
 
+year_input2 <- selectInput(
+  inputId = "year_input2",
+  choices = scores_df %>% filter(schedule_season > 1978) %>% select(schedule_season) %>% unique() %>% arrange(),
+  label = "Season"
+)
+
+playoff_input <- radioButtons(
+  inputId = "playoff_input",
+  choices = list("True" = TRUE, "False" = FALSE),
+  selected = FALSE,
+  label = "Include Playoffs"
+)
+
 page_one <- tabPanel(
   "Introduction", 
+  style = "margin-top: -20px",
   icon = icon("i", "fa-info-circle"),
   titlePanel("Introduction"),
-  wellPanel(style = "background: #fff;",
-            fluidRow(style = "padding: 30px", tags$head(tags$style("#container * 
-                                                           { display: inline; }")),
+  wellPanel(style = "margin-top: 20px",
+            fluidRow(style = "padding: 30px; margin-top: -20px; margin-bottom: -20px", tags$head(tags$style("#container * { display: inline; }")),
                      div(id="container",
                          h2("Domain"),
+                         br(),
                          br(),
                          p("We chose to look at sports betting in the NFL, which is the practice of 
         placing wagers on football players and games. There is a wide range in 
@@ -78,14 +92,16 @@ page_one <- tabPanel(
         football betting and team play."),
                          br(),
                          br(),
-                         p(em("This infographic shows which states have legalized sports gambling on 
+                         br(),
+                         img(src = 'betting_infographic.PNG', alt = "US sports betting infographic", height="60%", width="60%", style = "display: block; margin-left: auto; margin-right: auto;"),
+                         br(),
+                         p(em("This infographic, ", tags$a(href="https://www.economist.com/graphic-detail/2019/12/29/as-much-as-26bn-could-be-gambled-on-american-sport-in-2020", "by the Economist"), ", shows which states have legalized sports gambling on 
         the map and the bar chart on the side shows the rapid growth of legal 
         sports bets in the last few years.")),
-                         img(src = 'betting_infographic.PNG', alt = "US sports betting infographic", 
-                             height="50%", width="50%", align = "center"),
                          br(),
                          br(),
                          h2("Key Terms"),
+                         br(),
                          br(),
                          p(strong("Spread"), "- the expected point margin by which a team will win 
         or lose by. In other words, how much a team is favored by. A ", 
@@ -95,7 +111,7 @@ page_one <- tabPanel(
                          p(strong("Cover the spread"), "- the underdog/favored team was able to 
         win/lose by the certain threshold. An underdog team can either lose by 
         the number of points set in the spread or less and cover the spread. In 
-        other words, the underdog is given a handicap. However, the favored team ",
+        other words, the underdog is given a handicap. Moreover, the favored team ",
                            em("has"), " to win by the given spread or they will not cover the spread."),
                          br(),
                          p(strong("Over Under"), "- the expected total number of points scored by 
@@ -115,6 +131,7 @@ page_one <- tabPanel(
                          br(),
                          h2("Summary Information"),
                          br(),
+                         br(),
                          p("Our dataset includes ", textOutput("num_obs"), " observations that contain 
         values in the favorite team and spread favorite columns. We specifically 
         chose to keep the observations with these variables since we wanted to 
@@ -126,7 +143,7 @@ page_one <- tabPanel(
         also considered a 50/50 game or a tossup. Our biggest spread turned out 
         to be ", textOutput("favorite_max_spread"), " which is considered to be a 
         very one sided game. However,our mean turned out to be ", 
-                           textOutput("favorite_spread_mean"), " which was much closer to a 50/50 
+                           textOutput("favorite_spread_mean"), " which was much closer to a 50/50
         game than a one sided game. We also found that the proportion of 
         home teams that were favored was ", textOutput("prop_home_favorite"), " 
         and of the home favorites we found the proportion to cover the spread 
@@ -140,14 +157,16 @@ page_one <- tabPanel(
 
 
 page_two <- tabPanel(
-  "Interactive Visuals Part 1", 
+  "Betting Accuracy", 
+  style = "margin-top: -20px",
+  icon = icon("i", "fa-bullseye"),
   titlePanel("Betting Accuracy"),
   sidebarLayout(
-    sidebarPanel(
-      h4("A key aspect of sports betting is making predictions on who will win 
+    sidebarPanel(style = "margin-top: 10px", 
+                 h4("A key aspect of sports betting is making predictions on who will win 
          the game. In this section, we examine how those predictions stacked up 
          with actual game outcomes."),
-      p("This first plot is intended to show the relationship between the average percent
+                 p("This first plot is intended to show the relationship between the average percent
       accuracy of projected winners actually winning over the seasons. For the 
       first couple years of data, there are not many games recorded which results
       in outliers where the percent accuracy is either 100% or 0%. From the year
@@ -160,12 +179,12 @@ page_two <- tabPanel(
       plot, we can see that there was no significant change in the accuracy of 
       predicting winners, as the point for 2020 percent accuracy lies within the
       expected values represented by the shadow of the trend line."),
-      br(),
-      p("This second plot allows you to choose a team and a season year to see 
+                 br(),
+                 p("This second plot allows you to choose a team and a season year to see 
         how well bettors are able to predict game outcomes for home games. *Tip: 
         more recent seasons have more data!"),
-      team_input,
-      year_input
+                 team_input,
+                 year_input
     ),
     mainPanel(
       "The Average Percent Accuracy of Projected Favorites by Season",
@@ -177,36 +196,41 @@ page_two <- tabPanel(
 )
 
 page_three <- tabPanel(
-  "Interactive Visuals Part 2",
-  wellPanel(style = "background: #fff",
-            fluidRow(
-              column(1),
-              column(3,
-                     div(style = "font-size: 10px; padding: 14px; margin-left: 100px; margin-top: 60px"),
-                     spread_slider,
-                     
-              ),
-              column(6,
-                     wellPanel(style = "background-color: #CACFD3; border-color: #cbcbcb; padding: 4px; width: 800px; height: 410px;",
-                               plotOutput("spreadyears_plot")
-                     )
-              )
-            )
-  ),
-  wellPanel(style = "background: #fff",
-            fluidRow(
-              wellPanel(
-                style = "background-color: #CACFD3; border-color: #cbcbcb; padding: 4px; width: 800px; height: 410px;",
-                plotOutput("spreadcomp_plot")
-                
-              )
-            )
+  "Uncertainty in the Over/Under",
+  style = "margin-top: -20px",
+  icon = icon("i", "fa-question"),
+  titlePanel("Uncertainty in the Over/Under"),
+  # 
+  # fluidRow(
+  #   column(1),
+  #   column(3,
+  #          div(style = "font-size: 10px; padding: 14px; margin-left: 100px; margin-top: 60px"),
+  #          spread_slider
+  #   ),
+  #   column(6,
+  #          wellPanel(style = "background-color: #E3E5E7; border-color: #cbcbcb; padding: 4px; width: 800px; height: 410px;",
+  #                    plotOutput("spreadyears_plot")
+  #          )
+  #   )
+  # ),
+  sidebarLayout(
+    sidebarPanel(style = "margin-top: 10px",
+      p("In the unprecedented 2020 NFL season, we saw games being played with no fans to mininmal team interaction before the season. This was a season never like before, and it proved to show in the Over/Under lines of games. "),
+      div(style="display: inline-block;vertical-align:top; width: 150px;", year_input2), 
+      div(style="display: inline-block;vertical-align:top; width: 50px;",HTML("<br>")),
+      div(style="display: inline-block;vertical-align:top; width: 150px;", playoff_input)
+    ),
+    
+    mainPanel(style = "margin-top: 10px",
+      plotlyOutput("ou_boxplot")
+    )
   )
-  
 )
+
 
 page_four <- tabPanel(
   "Interacetive Visuals Part 3",
+  style = "margin-top: -20px",
   titlePanel("Interactive Visuals Part 3"),
   sidebarLayout(
     sidebarPanel(
@@ -220,6 +244,7 @@ page_four <- tabPanel(
 
 page_five <- tabPanel(
   "Finishing Thoughts",
+  style = "margin-top: -20px",
   icon = icon("i", "fa-check-square"),
   titlePanel("Finishing Thoughts"),
   wellPanel(style = "background: #fff;",
@@ -263,13 +288,6 @@ page_five <- tabPanel(
   
 )
 
-dropdownmenu <- navbarMenu(
-  "More",
-  "----",
-  "Section header",
-  tabPanel("Table")
-)
-
 page_test <- tabPanel(
   "Test Page",
   wellPanel(
@@ -292,10 +310,7 @@ page_test <- tabPanel(
 ui <- fluidPage(
   navbarPage(
     theme = shinytheme('flatly'),
-    tags$div(tags$img(src='nfllogo.png', width = 29, height = 40, style="float:left; margin-left: 5px; margin-right: 10px; margin-top: -10px"), tags$style(HTML("
-      body {
-        background-color: #CACFD3;
-      }"))), 
+    tags$div(tags$img(src='nfllogo.png', width = 29, height = 40, style="float:left; margin-left: 5px; margin-right: 10px; margin-top: -10px"), includeCSS("styles.css")), 
     page_one,         
     page_two,
     page_three,

@@ -18,6 +18,16 @@ order_week <- function(list) {
   week_ordered[week_ordered %in% list]
 }
 
+quantify_week <- function(df) {
+  df$schedule_week[df$schedule_week == "18"] <- 17
+  df$schedule_week[df$schedule_week == "Wildcard"] <- 18
+  df$schedule_week[df$schedule_week == "Division"] <- 19
+  df$schedule_week[df$schedule_week == "Conference"] <- 20
+  df$schedule_week[df$schedule_week == "Superbowl"] <- 21
+  
+  df
+}
+
 server <- function(input, output) {
   
   output$num_obs <- renderText({
@@ -225,24 +235,60 @@ server <- function(input, output) {
     ggplotly(plot)
   })
   
-  output$ouchange_plot <- renderPlotly({
-    pgquant <- scores_df %>% 
-      filter(schedule_season == input$year_input) %>% 
+  output$ou_boxplot <- renderPlotly({
+    ifelse(input$playoff_input, ou_df <- scores_df, ou_df <- scores_df %>% filter(schedule_playoff == FALSE))
+    
+    ou_df <- quantify_week(ou_df)
+    
+    avg_df <- ou_df %>% 
       group_by(schedule_week) %>% 
-      summarize(avg = mean(over_under_line)) 
-    pgquant$schedule_week[pgquant$schedule_week == "Wildcard"] <- 19
-    pgquant$schedule_week[pgquant$schedule_week == "Division"] <- 20
-    pgquant$schedule_week[pgquant$schedule_week == "Conference"] <- 21
-    pgquant$schedule_week[pgquant$schedule_week == "Superbowl"] <- 22
+      summarize(avg_ou = mean(over_under_line, na.rm = T))
+    
+    ou_df <- ou_df %>% 
+      mutate(schedule_week = as.numeric(schedule_week)) %>% 
+      filter(schedule_season == input$year_input2) 
+    
+    plot <- ggplot()  + geom_line(data = avg_df, aes(x = as.numeric(schedule_week), y = avg_ou), color = "#2C3E50")
+
+    plot <- plot + 
+      geom_boxplot(data = ou_df, aes(x = as.numeric(schedule_week), y = over_under_line), fill = "#939DA5") +
+      xlim(-0.25, 21) + labs(x = "Week", y = "Points") +
+      theme_ipsum()
+
+    ggplotly(plot)
+  })
+  
+  output$ouchange_plot <- renderPlotly({
+    ifelse(input$playoff_input, pgquant <- scores_df, pgquant <- scores_df %>% filter(schedule_playoff == FALSE))
+    pgquant <- pgquant %>% 
+      filter(schedule_season == input$year_input2) %>% 
+      group_by(schedule_week) %>% 
+      summarize(avgou = mean(over_under_line), avgtotal = mean(score_home + score_away)) 
+    
+    pgquant <- quantify_week(pgquant)
     
     pgquant <- pgquant %>% 
       mutate(schedule_week = as.numeric(schedule_week))
     
     plot <- pgquant %>% 
-      ggplot() +
-      geom_line(aes(x = schedule_week, y = avg)) +
+      ggplot(aes(x = schedule_week)) +
+      geom_line(aes(y = avgou), color = "#2C3E50") +
+      geom_line(aes(y = avgtotal), color = "#939DA5") +
       theme_ipsum()
     
+    ggplotly(plot)
+  })
+  
+  output$propover_plot <- renderPlotly({
+    plot <- scores_df %>% 
+      filter(schedule_season == input$year_input2) %>% 
+      mutate(schedule_week = as.numeric(schedule_week), went_over = (score_home + score_away) > over_under_line) %>% 
+      group_by(schedule_week) %>% 
+      summarize(over_prop = mean(went_over == TRUE)) %>% 
+      ggplot() +
+      geom_bar(aes(x = schedule_week, y = over_prop), stat = "identity") +
+      theme_ipsum()
+  
     ggplotly(plot)
   })
   
