@@ -4,8 +4,7 @@
 library(tidyverse)
 library(ggplot2)
 
-source("changedf.R")
-
+scores_df <- read.csv("../data:/scoresspread.csv")
 
 # Dataframe for % accuracy of projections by year
 projection_accuracy <- scores_df %>%

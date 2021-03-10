@@ -1,6 +1,6 @@
 library(tidyverse)
 
-source("changedf.R")
+scores_df <- read.csv("../data:/scoresspread.csv")
 
 summary_info <- list()
 summary_info$num_obs <- scores_df %>%

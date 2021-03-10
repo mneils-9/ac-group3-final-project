@@ -81,3 +81,6 @@ for (i in 1:nrow(scores_df)) {
     scores_df$percent_accuracy[i] <- 0
   }
 }
+
+# Save as csv to save time
+write.csv(scores_df, "../data:/scoresspread.csv")

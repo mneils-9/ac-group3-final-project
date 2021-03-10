@@ -1,7 +1,8 @@
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
-source("changedf.R")
+
+scores_df <- read.csv("../data:/scoresspread.csv")
 
 top10_summary <- scores_df %>% 
   filter(team_favorite == team_home) %>% 
