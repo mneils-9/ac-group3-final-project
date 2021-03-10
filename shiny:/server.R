@@ -7,6 +7,7 @@ library(hrbrthemes)
 library(gtools)
 library(shinyWidgets)
 library(shinymaterial)
+library(DT)
 
 scores_df <- read.csv("../data:/scoresspread.csv")
 o_histdf <- read.csv("../data:/offensehistory.csv")
@@ -28,6 +29,8 @@ quantify_week <- function(df) {
   
   df
 }
+
+cc <- scales::seq_gradient_pal("#2C3E50", "#E5E3E7", "Lab")(seq(0,5,length.out=22))
 
 server <- function(input, output) {
   
@@ -102,10 +105,6 @@ server <- function(input, output) {
       geom_point(mapping = aes(x = spread_favorite, y = favorite_score, color = favorite_cover)) +
       scale_color_viridis_d() +
       theme_ipsum()
-      # geom_histogram(mapping = aes(x = favorite_score, color = favorite_cover), alpha = 0.5, fill = "white") +
-      # scale_fill_manual(values = c("#00AFBB", "#E7B800")) +
-      # scale_color_manual(values = c("#00AFBB", "#E7B800")) +
-      # theme_ipsum()
   })
   
   output$week_spreadplot <- renderPlotly({
@@ -116,13 +115,13 @@ server <- function(input, output) {
         summarize(spread_avg = mean(spread_favorite, na.rm = T)) %>% 
         ggplot() +
         geom_line(mapping = aes(x = schedule_season, y = spread_avg, color = schedule_week)) + 
-        scale_color_viridis_d() +
+        scale_color_manual(values=cc) +
+        labs(y = "Spread", x = "Season", color = "Week") +
         theme_ipsum()
       ggplotly(plot)
     } else {
       scores_df %>% 
         ggplot() +
-        geom_blank() +
         theme_ipsum()
     }
   })
@@ -368,12 +367,13 @@ server <- function(input, output) {
       
   })
   
-  output$aggragate_table <- renderTable({
-    summarytable <- scores_df %>%
-      filter(team_favorite == team_home) %>%
-      group_by(team_favorite) %>%
-      summarise(average_homescore = mean(score_home))
-    
-    summarytable
+  output$aggragate_table <- renderDataTable({
+      summarytable <- scores_df %>%
+        filter(team_favorite == team_home) %>%
+        group_by(team_favorite) %>%
+        summarise(average_homescore = mean(score_home)) %>%
+        rename("Team" = "team_favorite", "Avg. Score" = "average_homescore")
+      datatable(summarytable, options = list(pageLength = 10))
+      
   })
 }

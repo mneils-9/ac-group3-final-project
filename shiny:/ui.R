@@ -3,6 +3,7 @@ library(shinythemes)
 
 scores_df <- read.csv("../data:/scoresspread.csv")
 
+
 team_input <- selectInput(
   inputId = "team_input",
   choices = sort(unique(scores_df$team_home)),
@@ -40,10 +41,11 @@ spread_slider <- knobInput(
   inputColor = "#2C3E50"
 )
 
-week_input <- checkboxGroupInput(
+week_input <- selectInput(
   inputId = "week_input",
   choices = mixedsort(unique(scores_df$schedule_week)),
-  label = "Week"
+  label = "Week",
+  multiple = TRUE
 )
 
 year_input <- selectInput(
@@ -79,7 +81,7 @@ opacitybp_input <- sliderInput(
   inputId = "opacitybp_input",
   min = 0,
   max = 1.0,
-  value = 0.5,
+  value = 0.1,
   step = 0.01,
   label = "Boxplot Opacity",
 )
@@ -206,10 +208,12 @@ page_two <- tabPanel(
     mainPanel(
       wellPanel(style = "margin-top: 10px; padding: 6px",
                 "The Average Percent Accuracy of Projected Favorites by Season",
-                plotlyOutput("bets_accuracy_plot"),
-                br(),
-                "A Team's Percent Accuracy in a Given Season",
-                plotlyOutput("team_season_accuracy")
+                plotlyOutput("bets_accuracy_plot")
+
+      ),
+      wellPanel(style = "margin-top: 10px; padding: 6px",
+        "A Team's Percent Accuracy in a Given Season",
+        plotlyOutput("team_season_accuracy")
       )
     )
   )
@@ -223,7 +227,7 @@ page_three <- tabPanel(
   sidebarLayout(
     sidebarPanel(style = "margin-top: 10px",
                  h4("Though the spread of games can tell us the uncertainy and favorites of games, Over/Under lines can tell us more about what the odd makers are seeing."),
-                 p("In the unprecedented 2020 NFL season, we saw games being played with no fans to mininmal team interaction before the season. This was a season never like before, and it proved to show in the Over/Under lines of games. In this plot, we are able to observe the distribution of the Over/Under lines of each week throughout the given season. We are also able to compare the overall averages of Over/Under lines and total points scored and the season averages. I included this to show how the trends might differ or be similar."),
+                 p("In the unprecedented 2020 NFL season, we saw games being played with no fans to mininmal team interaction before the season. This was a season never like before, and it proved to show in the Over/Under lines of games. In this plot, we are able to observe the distribution of the Over/Under lines of each week throughout the given season. In addition, we are able to compare the overall averages of Over/Under lines and total points scored and the season averages. I included this to show how the trends might differ or be similar."),
                  br(),
                  div(style="display: inline-block;vertical-align:top; width: 150px;", year_input2), 
                  div(style="display: inline-block;vertical-align:top; width: 50px;",HTML("<br>")),
@@ -241,23 +245,39 @@ trend_input,   chooseSliderSkin(
               ),
               
               wellPanel(
-                "We are able to see that in many cases the set Over/Under Lines were much lower compared to the total points scored. However, it is a common trend that odds makers increase the line as we see total points scored increase. Especially in the 2020 season, we can see that the average total scored points appears to be higher than the Over/Under Line for the first couple weeks."
+                "We are able to see that in many cases the set Over/Under Lines were much lower compared to the total points scored. However, it is a common trend that odds makers increase the line as we see total points scored increase. Especially in the 2020 season, we can see that the average total scored points appears to be higher than the Over/Under Line for the first couple weeks. It dipped for a bit after that, but took a bit of a bounce back after week 10. Overall, we do see that points are being scored at an increasing rate, causing the Over/Under Lines to go up as well. For the past decade or so, we have seen the average total points scored deviate away from the average calculated across all seasons."
               )
     )
   )
 )
 
 page_four <- tabPanel(
-  "Interacetive Visuals Part 3",
+  "Spread Change",
   style = "margin-top: -20px",
   icon = icon("i", "fa-arrows-alt-h"),
-  titlePanel("Interactive Visuals Part 3"),
+  titlePanel("Spread Change"),
+  
   sidebarLayout(
-    sidebarPanel(
-      "Side stuff"
+    sidebarPanel(style = "margin-top: 10px", week_input,
+                 p("As we mentioned on an introduction page, spread is  the expected 
+                   point margin by which a team will win or lose by. Point spread bets
+                   are a popular type of sports bet that you can make. Point spread bets
+                   is also mostly likely to be a big part of your winning betting strategy.
+                   Matter of fact, many successful professional sports bettors use the point spread
+                   bets stategy to make up their winning stategy. As the world was hit with COVID 19,
+                   I wanted to see if it would effect the average spread in the NFL sport betting at all.
+                   It turns out out that COVID 19 does not affect the average spread. However, You can still 
+                   utilize this plot by studying the trend of the spread and once you can pin out the pattern,
+                   you'll have a higher chance of spotting out the value and pick out the winners by 
+                   the amount point spread more confidently."), 
+                   
+                    
+     
     ),
-    mainPanel(
-      "Main stuff"
+    mainPanel(style = "margin-top: 10px",
+      wellPanel(style = "padding: 6px",
+        plotlyOutput("week_spreadplot")
+      )
     )
   )
 )
@@ -272,7 +292,7 @@ page_five <- tabPanel(
                insights for people who are interested in betting on NFL games. 
                Using knowledge gained from this project, potential bettors are 
                better equipped to make smart predictions about who will win a 
-               game.", em("Hover over each title to get our each individual reflections."))
+               game. Especially with the 2020 season behind us, line makers now have data from a season under a pandemic they can use to alter the lines. All in all, the pandemic resulted in uncertainty before the start of the season, but that uncertainty chipped away as the season progressed.", em("Hover over each title to get our each individual reflections."))
   ),
   fluidRow(
     column(4,
@@ -315,7 +335,7 @@ page_five <- tabPanel(
            "<div class=flip-card>
               <div class=flip-card-inner>
                 <div class=flip-card-front>
-                  <h2>part 3 title</h2> 
+                  <h2>Spread Change</h2> 
                 </div>
                 <div class=flip-card-back>
                   <i>Bryan: </i>
@@ -324,8 +344,18 @@ page_five <- tabPanel(
             </div>"
            )))
   ),
-  wellPanel(style = "background: #ecf0f1; margin-top: 20px",
-            p("Interested in placing bets? Check out this table showing each 
+  
+  br(),
+
+  fluidRow(
+    column(5,
+           wellPanel(
+             dataTableOutput("aggragate_table")
+           )
+    ),
+    column(5,
+           wellPanel(style = "width: 790px",
+                     p("Interested in placing bets? Check out this table showing each 
               team's average score during a home game. This will be helpful to new 
               bettors since for each NFL game the oddsmakers set a number of points
               in which the favorite team is favored by. By making this table it 
@@ -336,13 +366,16 @@ page_five <- tabPanel(
               as well. Therefore by figuring out the favorite team and the 
               average score of the hometeam, it'll give us a better chance of 
               the prediction on how much points that the bettor's team will win 
-              or lose by."),
-            br(),
-            tableOutput("aggragate_table"),
-            br(),
-            a(href ="https://www.oddsshark.com/nfl/sites", "Click to See Betting Sites"),
-            br(),
-            img(src = 'ball_money.png', alt = "Football Showered with Money"),
+              or lose by.", em("Click on the image below to get a list of betting sites available.")),
+                     
+           ),
+           
+             wellPanel(style = "width: 790px; height: 320px; padding: 6px",
+                       a(href ="https://www.oddsshark.com/nfl/sites", img(src = 'ball_money.png', alt = "Football Showered with Money", style = "width: 775px; height: 305px;"), style = "text-align: center; font-size: 10px; display: block;")
+             )
+           )
+
+
   )
   
 )
