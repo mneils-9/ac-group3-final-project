@@ -174,6 +174,7 @@ page_three <- tabPanel(
   )
 )
 
+# Weeks & Seasons Average Spread Page
 page_four <- tabPanel(
   "Weeks & Seasons Average Spread",
   style = "margin-top: -20px",
@@ -195,6 +196,7 @@ page_four <- tabPanel(
   )
 )
 
+# Conclusion Page
 page_five <- tabPanel(
   "Finishing Thoughts",
   style = "margin-top: -20px",
@@ -203,8 +205,8 @@ page_five <- tabPanel(
   wellPanel(style = "margin-top: 21px",
             h4("After completing this project, we have come up with important insights for people who are interested in betting on NFL games. Using knowledge gained from this project, potential bettors are better equipped to make smart predictions about who will win a game."),
             h4(
-            "All in all, the pandemic resulted in uncertainty before the start of the season, but that uncertainty chipped away as the season progressed. Linemakers were able to adapt to the high scoring play-style of the teams over this past season. Now, line makers now have data from a season under a pandemic they can use to set better lines. Even for bettors, they will have the data need to make smarter and safer bets for future seasons.", 
-            em("(Hover over each title to get each of our reflections.)"))
+              "All in all, the pandemic resulted in uncertainty before the start of the season, but that uncertainty chipped away as the season progressed. Linemakers were able to adapt to the high scoring play-style of the teams over this past season. Now, line makers now have data from a season under a pandemic they can use to set better lines. Even for bettors, they will have the data need to make smarter and safer bets for future seasons.", 
+              em("(Hover over each title to get each of our reflections.)"))
   ),
   fluidRow(
     column(4,
@@ -275,6 +277,7 @@ page_five <- tabPanel(
   
 )
 
+# Putting everything together
 ui <- fluidPage(
   navbarPage(
     theme = shinytheme('flatly'),
