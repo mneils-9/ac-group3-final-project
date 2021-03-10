@@ -1,8 +1,16 @@
-library(shiny)
-library(shinythemes)
+require(tidyverse)
+require(shiny)
+require(ggplot2)
+require(plotly)
+require(viridis)
+require(hrbrthemes)
+require(gtools)
+require(shinythemes)
+require(shinyWidgets)
+require(shinymaterial)
+require(DT)
 
-scores_df <- read.csv("../data:/scoresspread.csv")
-
+scores_df <- read.csv("data:/scoresspread.csv")
 
 team_input <- selectInput(
   inputId = "team_input",
@@ -227,7 +235,7 @@ page_three <- tabPanel(
   sidebarLayout(
     sidebarPanel(style = "margin-top: 10px",
                  h4("Though the spread of games can tell us the uncertainy and favorites of games, Over/Under lines can tell us more about what the odd makers are seeing."),
-                 p("In the unprecedented 2020 NFL season, we saw games being played with no fans to mininmal team interaction before the season. This was a season never like before, and it proved to show in the Over/Under lines of games. In this plot, we are able to observe the distribution of the Over/Under lines of each week throughout the given season. In addition, we are able to compare the overall averages of Over/Under lines and total points scored and the season averages. I included this to show how the trends might differ or be similar."),
+                 p("In the unprecedented 2020 NFL season, we saw games being played with no fans to minimal team interaction before the season. This was a season never like before, and it proved to show in the Over/Under lines of games. In this plot, we are able to observe the distribution of the Over/Under lines of each week throughout the given season. In addition, we are able to compare the overall averages of Over/Under lines and total points scored, and the season averages. I included this to show how the trends might differ or be similar."),
                  br(),
                  div(style="display: inline-block;vertical-align:top; width: 150px;", year_input2), 
                  div(style="display: inline-block;vertical-align:top; width: 50px;",HTML("<br>")),
@@ -245,17 +253,17 @@ trend_input,   chooseSliderSkin(
               ),
               
               wellPanel(
-                "We are able to see that in many cases the set Over/Under Lines were much lower compared to the total points scored. However, it is a common trend that odds makers increase the line as we see total points scored increase. Especially in the 2020 season, we can see that the average total scored points appears to be higher than the Over/Under Line for the first couple weeks. It dipped for a bit after that, but took a bit of a bounce back after week 10. Overall, we do see that points are being scored at an increasing rate, causing the Over/Under Lines to go up as well. For the past decade or so, we have seen the average total points scored deviate away from the average calculated across all seasons."
+                "We are able to see that in many cases the set Over/Under Lines was much lower compared to the total points scored. However, it is a common trend that oddsmakers increase the line as we see total points scored increase. Especially in the 2020 season, we can see that the average total scored points appears to be higher than the Over/Under Line for the first couple of weeks. It dipped for a bit after that but took a bit of a bounce-back after week 10. Overall, we do see that points are being scored at an increasing rate, causing the Over/Under Lines to go up as well. For the past decade or so, we have seen the average total points scored deviate away from the average calculated across all seasons."
               )
     )
   )
 )
 
 page_four <- tabPanel(
-  "Spread Change",
+  "Weeks & Seasons Average Spread",
   style = "margin-top: -20px",
   icon = icon("i", "fa-arrows-alt-h"),
-  titlePanel("Spread Change"),
+  titlePanel("Weeks & Seasons Average Spread"),
   
   sidebarLayout(
     sidebarPanel(style = "margin-top: 10px", week_input,
@@ -265,7 +273,7 @@ page_four <- tabPanel(
                    is also mostly likely to be a big part of your winning betting strategy.
                    Matter of fact, many successful professional sports bettors use the point spread
                    bets stategy to make up their winning stategy. As the world was hit with COVID 19,
-                   I wanted to see if it would effect the average spread in the NFL sport betting at all.
+                   I wanted to see if it would affect the average spread in the NFL sport betting at all.
                    It turns out out that COVID 19 does not affect the average spread. However, You can still 
                    utilize this plot by studying the trend of the spread and once you can pin out the pattern,
                    you'll have a higher chance of spotting out the value and pick out the winners by 
@@ -292,7 +300,7 @@ page_five <- tabPanel(
                insights for people who are interested in betting on NFL games. 
                Using knowledge gained from this project, potential bettors are 
                better equipped to make smart predictions about who will win a 
-               game. Especially with the 2020 season behind us, line makers now have data from a season under a pandemic they can use to alter the lines. All in all, the pandemic resulted in uncertainty before the start of the season, but that uncertainty chipped away as the season progressed.", em("Hover over each title to get our each individual reflections."))
+               game. Especially with the 2020 season behind us, line makers now have data from a season under a pandemic they can use to alter the lines. All in all, the pandemic resulted in uncertainty before the start of the season, but that uncertainty chipped away as the season progressed.", em("(Hover over each title to get each of our reflections.)"))
   ),
   fluidRow(
     column(4,
@@ -335,10 +343,17 @@ page_five <- tabPanel(
            "<div class=flip-card>
               <div class=flip-card-inner>
                 <div class=flip-card-front>
-                  <h2>Spread Change</h2> 
+                  <h2>Weeks & Seasons Average Spread</h2> 
                 </div>
                 <div class=flip-card-back>
-                  <i>Bryan: </i>
+                  <i>Bryan: I analyzed how Covid 19 would affect the average spread.
+              In interactive Visuals part 3, I explore the changes in average spread
+              per week of each NFL seasons. From analyzing the trend of average of all the
+              seasons before 2020 and comparing it with the 2020 NFL season,
+              I see that there was no correlation between Covid 19 and the average spread.
+              The average spread still moved in a normal trend. From what I see, 
+              the average spread from week 1 to week 18 from the year 2015 to 2020. The spread
+              average never exceed or fall by 1.5 points each following year which was unique and cool to see. </i>
                 </div>
               </div>
             </div>"

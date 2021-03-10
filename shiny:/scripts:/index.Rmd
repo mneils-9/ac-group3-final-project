@@ -1,0 +1,56 @@
+---
+title: "COVID 19's Effect on 2020 NFL sports betting"
+author: "INFO 201 Lab AC Group 3"
+date: "2/13/2020"
+output: html_document
+---
+Main Question: How did the pandemic affect the betting markets of the 2020 NFL season?
+
+```{r setup, include = FALSE}
+library("ggplot2")
+source("summaryinfo.R")
+
+library("knitr")
+```
+
+## Project Intro
+This project aims to answer the question: _How did the COVID 19 pandemic affect the betting markets during the 2020 NFL season._ Sports betting is common worldwide, and this project focuses specifically on wagers placed on players and games from the United State's National Football League (NFL). There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in NFL betting, especially how the COVID 19 pandemic has affected football betting and team play.
+
+### Key Terms
+_Spread_ - the expected point margin in which a team will _win/lose_ by. In other words, how much a team is favored by. A _negative_ spread implies the team is favored by that amount, a _positive_ spread implies the team is the underdog by that amount. 
+
+_Cover the spread_ - the underdog/favored team was able to win/lose by the certain threshold. An underdog team can _lose_ by the number of points set in the spread or less and _cover the spread_. In other words, the underdog is given a handicap. However, the favored team __has__ to _win_ by the given spread or they will not _cover the spread_. 
+
+_Over Under_ - the expected _total number_ of points scored by both teams in the given game. People can either bet on the over (going to go over the expected total) or the under (going under the expected total).
+
+E.g. the super bowl between the Chiefs and the Buccaneers this year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 57.7. This means that the Chiefs were favored by 3.5 points, and they had to win by 3.5 points or else they wouldn't cover the spread. The Buccaneers on the other hand, could lose by less than 3.5 points or just win to cover the spread. The Buccaneers came out on top 31-9, so Chiefs didn't cover and the game went under since the total points scored was under 57.7.
+
+## Summary Information 
+Our dataset includes `r summary_info$num_obs` observations that contain values in the favorite team and spread favorite columns. We specifically chose to keep the observations with these variables since we wanted to study the trend of the betting. This turned out to be around `r summary_info$num_unique_years` seasons worth of data with `r summary_info$num_different_teams` different teams. Thus, ignoring the rows without spread data, the smallest spread turned out to be `r summary_info$favorite_min_spread`, which is also considered a 50/50 game or a tossup. Our biggest spread turned out be `r summary_info$favorite_max_spread`, which is considered to be a very one sided game. However, our mean turned out to be `r summary_info$favorite_spread_mean`, which was much closer to a 50/50 game than a one sided game. We also found that the proportion of home teams that were favored was `r summary_info$prop_home_favorite`, and of the home favorites we found the proportion to cover the spread to be `r summary_info$prop_home_favorite_cover`.
+
+## Aggragate Table
+Our dataset uses 'scores_df' observations. We decided to focus on the favorite team and the average score of the the home team. We chose to focus on this because for each NFL game the oddsmakers set a number of points in which the favorite team is favored by. By making this table it allows the Bettors to see the average scores of the favorite home team and either choose for the favored team to win by more than the number of points set, or bet on the underdogs to lose by less than the number of points, it can also work the other way around as well. Therefore by figuring out the favorite team and the average score of the hometeam, it'll give us a better chance of the prediction on how much points that the bettor's team will win or lose by. 
+
+```{r table, echo=FALSE}
+source("table.R")
+kable(summarytable)
+```
+
+
+## Plot 1: The Average Percent Accuracy of Projected Favorites by Season
+```{r plot1, code = readLines('chart_1.R'), echo = FALSE}
+```
+
+This plot is intended to show the relationship between the average percent accuracy of projected winners actually winning over the seasons. For the first couple years of data, there are not many games recorded which results in outliers where the percent accuracy is either 100% or 0%. From the year 1980 and beyond, we can see a general trend represented with the red trend line of a percent accuracy around 60%. This means that for each season, where there are multiple games played, the average accuracy of the projected favorite team winning is about 60%. This plot is answering the question of whether the accuracy of projected favorites changed for the 2020 season due to the COVID 19 pandemic and an adjusted season. In the plot, we can see that there was no significant change in the accuracy of predicting winners, as the point for 2020 percent accuracy lies within the expected values represented by the shadow of the trend line.
+
+## Plot 2: Point Differentials When Home Team Is Favored vs. Not Favored
+```{r plot2, code = readLines('chart_2.R'), echo = FALSE}
+```
+
+This plot aims to compare how different the outcomes are when home teams are favored vs when they are not. We can clearly see in the chart that when home teams are favorites, they win by a larger margin and lose by a smaller margin. It also seems like the distribution of when the home teams are not favored is similar as seen in the boxplot shape. Overall, we can see a clear difference between the two groups.
+
+## Plot 3: Top Ten Average Favorite Team Home Score
+```{r plot3, code = readLines('chart_3.R'), echo = FALSE}
+```
+
+This plot shows you the average score of the top ten favorite teams at home. With this dataset we can see on the horizontal bar chart of the top ten favorite home team averaging at least 25 points or more. This bar chart helps the bettors have a better understanding of the average points that the favorite home team delivers and use this information to place a bet on the team of their choice to win or lose by a certain number of points. 
