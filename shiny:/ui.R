@@ -231,9 +231,9 @@ page_three <- tabPanel(
 
 
 page_four <- tabPanel(
-  "Interacetive Visuals Part 3",
+  "Weeks & Seasons Average Spread",
   style = "margin-top: -20px",
-  titlePanel("Interactive Visuals Part 3"),
+  titlePanel("Weeks & Seasons Average Spread"),
   sidebarLayout(
     sidebarPanel(week_input,
                  p("As we mentioned on an introduction page, spread is  the expected 
@@ -242,7 +242,7 @@ page_four <- tabPanel(
                    is also mostly likely to be a big part of your winning betting strategy.
                    Matter of fact, many successful professional sports bettors use the point spread
                    bets stategy to make up their winning stategy. As the world was hit with COVID 19,
-                   I wanted to see if it would effect the average spread in the NFL sport betting at all.
+                   I wanted to see if it would affect the average spread in the NFL sport betting at all.
                    It turns out out that COVID 19 does not affect the average spread. However, You can still 
                    utilize this plot by studying the trend of the spread and once you can pin out the pattern,
                    you'll have a higher chance of spotting out the value and pick out the winners by 
@@ -274,6 +274,15 @@ page_five <- tabPanel(
               Knowing that the 2020 NFL season was shaken up due to the COVID 19
               pandemic, it is suprising that sports bets continue to be 
               relatively accurate."),
+            br(),
+            p("Bryan: I analyzed how Covid 19 would affect the average spread.
+              In interactive Visuals part 3, I explore the changes in average spread
+              per week of each NFL seasons. From analyzing the trend of average of all the
+              seasons before 2020 and comparing it with the 2020 NFL season,
+              I see that there was no correlation between Covid 19 and the average spread.
+              The average spread still moved in a normal trend. From what I see, 
+              the average spread from week 1 to week 18 from the year 2015 to 2020. The spread
+              average never exceed or fall by 1.5 points each following year which was unique and cool to see."), 
             br(),
             h4("After completing this project, we have come up with important 
                insights for people who are interested in betting on NFL games. 
