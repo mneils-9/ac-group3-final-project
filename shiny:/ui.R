@@ -54,15 +54,34 @@ year_input <- selectInput(
 
 year_input2 <- selectInput(
   inputId = "year_input2",
-  choices = scores_df %>% filter(schedule_season > 1978) %>% select(schedule_season) %>% unique() %>% arrange(),
+  choices = scores_df %>% filter(schedule_season > 1978) %>% select(schedule_season) %>% unique() %>% arrange() %>% map_df(rev),
   label = "Season"
 )
 
-playoff_input <- radioButtons(
+playoff_input <- prettyRadioButtons(
   inputId = "playoff_input",
   choices = list("True" = TRUE, "False" = FALSE),
   selected = FALSE,
-  label = "Include Playoffs"
+  label = "Include Playoffs",
+  animation = "smooth",
+  shape = "curve",
+  inline = TRUE
+)
+
+trend_input <- selectInput(
+  inputId = "trend_input",
+  choices = c("Overall O/U Line", "Overall Total Points", "Season O/U Line", "Season Total Points"),
+  multiple = TRUE,
+  label = "Include Trend Line",
+)
+
+opacitybp_input <- sliderInput(
+  inputId = "opacitybp_input",
+  min = 0,
+  max = 1.0,
+  value = 0.5,
+  step = 0.01,
+  label = "Boxplot Opacity",
 )
 
 page_one <- tabPanel(
@@ -70,10 +89,10 @@ page_one <- tabPanel(
   style = "margin-top: -20px",
   icon = icon("i", "fa-info-circle"),
   titlePanel("Introduction"),
-  wellPanel(style = "margin-top: 20px",
+  wellPanel(style = "margin-top: 21px",
             fluidRow(style = "padding: 30px; margin-top: -20px; margin-bottom: -20px", tags$head(tags$style("#container * { display: inline; }")),
                      div(id="container",
-                         h2("Domain"),
+                         h3("Domain"),
                          br(),
                          br(),
                          p("We chose to look at sports betting in the NFL, which is the practice of 
@@ -94,13 +113,12 @@ page_one <- tabPanel(
                          br(),
                          br(),
                          img(src = 'betting_infographic.PNG', alt = "US sports betting infographic", height="60%", width="60%", style = "display: block; margin-left: auto; margin-right: auto;"),
-                         br(),
-                         p(em("This infographic, ", tags$a(href="https://www.economist.com/graphic-detail/2019/12/29/as-much-as-26bn-could-be-gambled-on-american-sport-in-2020", "by the Economist"), ", shows which states have legalized sports gambling on 
+                         tags$div(style = "text-align: center; font-size: 10px; display: block;", tags$em("This infographic, ", tags$a(href="https://www.economist.com/graphic-detail/2019/12/29/as-much-as-26bn-could-be-gambled-on-american-sport-in-2020", "by the Economist"), ", shows which states have legalized sports gambling on 
         the map and the bar chart on the side shows the rapid growth of legal 
         sports bets in the last few years.")),
                          br(),
                          br(),
-                         h2("Key Terms"),
+                         h3("Key Terms"),
                          br(),
                          br(),
                          p(strong("Spread"), "- the expected point margin by which a team will win 
@@ -119,7 +137,8 @@ page_one <- tabPanel(
         to go over the expected total) or the under (going under the expected 
         total)."),
                          br(),
-                         p(em("E.g."), "he super bowl between the Chiefs and the Buccaneers this 
+                         br(),
+                         p(em("E.g."), "the super bowl between the Chiefs and the Buccaneers this 
         year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 
         57.7. This means that the Chiefs were favored by 3.5 points, and they 
         had to win by 3.5 points or else they wouldn't cover the spread. The 
@@ -129,7 +148,7 @@ page_one <- tabPanel(
         under 57.7."),
                          br(),
                          br(),
-                         h2("Summary Information"),
+                         h3("Summary Information"),
                          br(),
                          br(),
                          p("Our dataset includes ", textOutput("num_obs"), " observations that contain 
@@ -153,8 +172,6 @@ page_one <- tabPanel(
             ),
   )
 )
-
-
 
 page_two <- tabPanel(
   "Betting Accuracy", 
@@ -187,52 +204,53 @@ page_two <- tabPanel(
                  year_input
     ),
     mainPanel(
-      "The Average Percent Accuracy of Projected Favorites by Season",
-      plotlyOutput("bets_accuracy_plot"),
-      "A Team's Percent Accuracy in a Given Season",
-      plotlyOutput("team_season_accuracy")
+      wellPanel(style = "margin-top: 10px; padding: 6px",
+                "The Average Percent Accuracy of Projected Favorites by Season",
+                plotlyOutput("bets_accuracy_plot"),
+                br(),
+                "A Team's Percent Accuracy in a Given Season",
+                plotlyOutput("team_season_accuracy")
+      )
     )
   )
 )
 
 page_three <- tabPanel(
-  "Uncertainty in the Over/Under",
+  "Uncertainty in the Over/Under Lines",
   style = "margin-top: -20px",
   icon = icon("i", "fa-question"),
-  titlePanel("Uncertainty in the Over/Under"),
-  # 
-  # fluidRow(
-  #   column(1),
-  #   column(3,
-  #          div(style = "font-size: 10px; padding: 14px; margin-left: 100px; margin-top: 60px"),
-  #          spread_slider
-  #   ),
-  #   column(6,
-  #          wellPanel(style = "background-color: #E3E5E7; border-color: #cbcbcb; padding: 4px; width: 800px; height: 410px;",
-  #                    plotOutput("spreadyears_plot")
-  #          )
-  #   )
-  # ),
+  titlePanel("Uncertainty in the Over/Under Lines"),
   sidebarLayout(
     sidebarPanel(style = "margin-top: 10px",
-      p("In the unprecedented 2020 NFL season, we saw games being played with no fans to mininmal team interaction before the season. This was a season never like before, and it proved to show in the Over/Under lines of games. "),
-      div(style="display: inline-block;vertical-align:top; width: 150px;", year_input2), 
-      div(style="display: inline-block;vertical-align:top; width: 50px;",HTML("<br>")),
-      div(style="display: inline-block;vertical-align:top; width: 150px;", playoff_input)
+                 h4("Though the spread of games can tell us the uncertainy and favorites of games, Over/Under lines can tell us more about what the odd makers are seeing."),
+                 p("In the unprecedented 2020 NFL season, we saw games being played with no fans to mininmal team interaction before the season. This was a season never like before, and it proved to show in the Over/Under lines of games. In this plot, we are able to observe the distribution of the Over/Under lines of each week throughout the given season. We are also able to compare the overall averages of Over/Under lines and total points scored and the season averages. I included this to show how the trends might differ or be similar."),
+                 br(),
+                 div(style="display: inline-block;vertical-align:top; width: 150px;", year_input2), 
+                 div(style="display: inline-block;vertical-align:top; width: 50px;",HTML("<br>")),
+                 div(style="display: inline-block;vertical-align:top; width: 150px;", playoff_input),
+trend_input,   chooseSliderSkin(
+  skin = "Flat",
+  color = "#1C2833"
+), opacitybp_input
     ),
     
     mainPanel(style = "margin-top: 10px",
-              wellPanel(style = "padding: 4px",
-                plotlyOutput("ou_boxplot")
+              wellPanel(style = "padding: 6px",
+                        "Distribution of Over/Under Lines for Every Week of the Season",
+                        plotlyOutput("ou_boxplot")
+              ),
+              
+              wellPanel(
+                "We are able to see that in many cases the set Over/Under Lines were much lower compared to the total points scored. However, it is a common trend that odds makers increase the line as we see total points scored increase. Especially in the 2020 season, we can see that the average total scored points appears to be higher than the Over/Under Line for the first couple weeks."
               )
     )
   )
 )
 
-
 page_four <- tabPanel(
   "Interacetive Visuals Part 3",
   style = "margin-top: -20px",
+  icon = icon("i", "fa-arrows-alt-h"),
   titlePanel("Interactive Visuals Part 3"),
   sidebarLayout(
     sidebarPanel(
@@ -249,24 +267,64 @@ page_five <- tabPanel(
   style = "margin-top: -20px",
   icon = icon("i", "fa-check-square"),
   titlePanel("Finishing Thoughts"),
-  wellPanel(style = "background: #ecf0f1; margin-top: 20px",
-            h4("Reflections"),
-            p("Maddie: I analyzed how the accuracy of projected favorites changed 
-              in the 2020 season. In Interactive Visuals Part 1 I explore NFL 
-              betting accuracy which has consistently been around 60% accurate 
-              for the more recent seasons that we have a complete set of data 
-              for where all season's games are reported. Looking specifically at 
-              the 2020 season, we can see that here was no significant change in 
-              the accuracy of predicting winners, as it is around 63% accurate. 
-              Knowing that the 2020 NFL season was shaken up due to the COVID 19
-              pandemic, it is suprising that sports bets continue to be 
-              relatively accurate."),
-            br(),
+  wellPanel(style = "margin-top: 21px",
             h4("After completing this project, we have come up with important 
                insights for people who are interested in betting on NFL games. 
                Using knowledge gained from this project, potential bettors are 
                better equipped to make smart predictions about who will win a 
-               game."),
+               game.", em("Hover over each title to get our each individual reflections."))
+  ),
+  fluidRow(
+    column(4,
+           tags$div(HTML(
+           "<div class=flip-card>
+              <div class=flip-card-inner>
+                <div class=flip-card-front>
+                  <h2 style=text-align:center;vertical-align:middle>Betting Accuracy</h2> 
+                </div>
+                <div class=flip-card-back>
+                  <i style=text-align:center>Maddie: I analyzed how the accuracy of projected favorites changed 
+                          in the 2020 season. I explore NFL 
+                          betting accuracy which has consistently been around 60% accurate 
+                          for the more recent seasons that we have a complete set of data 
+                          for where all season's games are reported. Looking specifically at 
+                          the 2020 season, we can see that here was no significant change in 
+                          the accuracy of predicting winners, as it is around 63% accurate. 
+                          Knowing that the 2020 NFL season was shaken up due to the COVID 19
+                          pandemic, it is suprising that sports bets continue to be 
+                          relatively accurate.</i>
+                </div>
+              </div>
+            </div>"
+           ))),
+    column(4,
+           tags$div(HTML(
+           "<div class=flip-card>
+              <div class=flip-card-inner>
+                <div class=flip-card-front>
+                  <h2 style=text-align:center>Uncertainty in the Over/Under Lines</h2> 
+                </div>
+                <div class=flip-card-back>
+                  <i style=text-align:center; padding:30px>Kobe: It was interesting to see how the Over/Under lines differed amongst different seasons. But overall, we've seen a trend up in offensive scoring, causing the Over/Under lines to increase proportionally. However, we saw odds makers didn't take into account more factors to why offenses would start scoring more in the 2020 season as we saw totals going way over the line in the first few weeks. Odd makers definitely had a very tough time making lines in this unprecedented season. Though I think they will have much better lines for the 2021 season as they were able to collect data for one season through a pandemic.</i>
+                </div>
+              </div>
+            </div>"
+           ))),
+    column(4,
+           tags$div(HTML(
+           "<div class=flip-card>
+              <div class=flip-card-inner>
+                <div class=flip-card-front>
+                  <h2>part 3 title</h2> 
+                </div>
+                <div class=flip-card-back>
+                  <i>Bryan: </i>
+                </div>
+              </div>
+            </div>"
+           )))
+  ),
+  wellPanel(style = "background: #ecf0f1; margin-top: 20px",
             p("Interested in placing bets? Check out this table showing each 
               team's average score during a home game. This will be helpful to new 
               bettors since for each NFL game the oddsmakers set a number of points
@@ -289,25 +347,6 @@ page_five <- tabPanel(
   
 )
 
-page_test <- tabPanel(
-  "Test Page",
-  wellPanel(
-    fluidRow(
-      column(7,
-             wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 720px;",
-                       plotlyOutput("overunder_plot", height = 680)
-             )
-      ),
-      column(5,
-             wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 350px;",
-                       plotlyOutput("ouscorep_plot", height = 320)),  
-             wellPanel(style = "background-color: #fff; border-color: #cbcbcb; height: 350px;",
-                       plotlyOutput("pointmargin_plot", height = 320))
-      )
-    )
-  )
-)
-
 ui <- fluidPage(
   navbarPage(
     theme = shinytheme('flatly'),
@@ -316,7 +355,6 @@ ui <- fluidPage(
     page_two,
     page_three,
     page_four,
-    page_five,
-    page_test
+    page_five
   )
 )

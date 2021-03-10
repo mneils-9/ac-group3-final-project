@@ -6,6 +6,7 @@ library(viridis)
 library(hrbrthemes)
 library(gtools)
 library(shinyWidgets)
+library(shinymaterial)
 
 scores_df <- read.csv("../data:/scoresspread.csv")
 o_histdf <- read.csv("../data:/offensehistory.csv")
@@ -243,20 +244,48 @@ server <- function(input, output) {
     
     avg_df <- ou_df %>% 
       group_by(schedule_week) %>% 
-      summarize(avg_ou = mean(over_under_line, na.rm = T))
+      summarize(avg_ou = mean(over_under_line, na.rm = T), avg_total = mean(score_home + score_away, na.rm = T))
     
     ou_df <- ou_df %>% 
       mutate(schedule_week = as.numeric(schedule_week)) %>% 
-      filter(schedule_season == input$year_input2) 
+      filter(schedule_season == input$year_input2)
     
-    plot <- ggplot()  + geom_line(data = avg_df, aes(x = as.numeric(schedule_week), y = avg_ou), color = "#2C3E50")
+    season_df <- ou_df %>%
+      group_by(schedule_week) %>% 
+      summarize(avg_ou = mean(over_under_line, na.rm = T), avg_total = mean(score_home + score_away, na.rm = T))
 
-    plot <- plot + 
-      geom_boxplot(data = ou_df, aes(x = as.numeric(schedule_week), y = over_under_line), fill = "#939DA5") +
-      xlim(-0.25, 21) + labs(x = "Week", y = "Points") +
-      theme_ipsum()
-
-    ggplotly(plot)
+    plot <- ggplot()
+    
+    if (input$opacitybp_input == 0) {
+      plot <- plot + geom_blank() + theme_ipsum()
+    } else {
+      plot <- plot +  geom_boxplot(data = ou_df, aes(x = as.numeric(schedule_week), y = over_under_line), color = "#566573", fill = "#939DA5", alpha = input$opacitybp_input) +
+        xlim(-0.25, 21) + labs(x = "Week", y = "Points") + 
+        theme_ipsum()  +
+        theme(legend.position = "right")
+    }
+    
+    if ("Overall O/U Line" %in% input$trend_input) {
+      plot <- plot + geom_line(data = avg_df, aes(x = as.numeric(schedule_week), y = avg_ou, color = "overallou"))
+    }
+    
+    if ("Overall Total Points" %in% input$trend_input) {
+      plot <- plot + geom_line(data = avg_df, aes(x = as.numeric(schedule_week), y = avg_total, color = "overalltotpts"), linetype = "dashed")
+    }
+    
+    if ("Season O/U Line" %in% input$trend_input) {
+      plot <- plot +  geom_line(data = season_df, aes(x = as.numeric(schedule_week), y = avg_ou, color = "seasonou"))
+    }
+    
+    if ("Season Total Points" %in% input$trend_input) {
+      plot <- plot + geom_line(data = season_df, aes(x = as.numeric(schedule_week), y = avg_total, color = "seasontotpts"), linetype = "dashed")
+    }
+    
+    plot <- plot +
+      scale_colour_manual(name="Trend Line",
+                          values=c(overallou = "#013369", overalltotpts="#013369", seasonou="#013369", seasontotpts="#013369")) + xlab("Week") + ylab("Points")
+    
+    ggplotly(plot) 
   })
   
   # Kobe: Might use
