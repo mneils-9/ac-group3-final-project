@@ -18,37 +18,6 @@ team_input <- selectInput(
   label = "Select Team"
 )
 
-team_input2 <- selectInput(
-  inputId = "team_input2",
-  choices = sort(unique(scores_df$team_home)),
-  label = "Select Team"
-)
-
-ht_input <- selectInput(
-  inputId = "ht_input",
-  choices = scores_df %>% 
-    filter(schedule_season == 2020) %>% 
-    select(team_home) %>% 
-    unique() %>% 
-    arrange(team_home),
-  label = "2020 Season"
-)
-
-spread_slider <- knobInput(
-  inputId = "spread_slider",
-  label = "Spread",
-  value = -3,
-  min = min(scores_df$spread_favorite),
-  max = max(scores_df$spread_favorite),
-  step = 0.5,
-  thickness = 0.4,
-  rotation = "anticlockwise",
-  displayPrevious = TRUE,
-  lineCap = "default",
-  fgColor = "#2C3E50",
-  inputColor = "#2C3E50"
-)
-
 week_input <- selectInput(
   inputId = "week_input",
   choices = mixedsort(unique(scores_df$schedule_week)),
@@ -94,6 +63,7 @@ opacitybp_input <- sliderInput(
   label = "Boxplot Opacity",
 )
 
+# Introduction Page
 page_one <- tabPanel(
   "Introduction", 
   style = "margin-top: -20px",
@@ -105,84 +75,43 @@ page_one <- tabPanel(
                          h3("Domain"),
                          br(),
                          br(),
-                         p("We chose to look at sports betting in the NFL, which is the practice of 
-        placing wagers on football players and games. There is a wide range in 
-        the level of participation for sports betting: from casual fans to 
-        serious money-making fanatics. Regardless of motivations, all sports 
-        bets follow three simple steps: selection, stakes, and odds. The most 
-        popular types of sports bets are on point spreads and totals, where 
-        people often use statistics to decide on their bet and then wait for the
-        game to be played to see the outcome. Betting is always a gamble, and 
-        sports betting involves necessary risk. Sports betting often happens 
-        online, which is where this project is focusing. We choose this domain 
-        because of a shared interest in sports, and curiosity about the world of
-        football betting. This project will examine trends in National Football 
-        League (NFL) betting, especially how the COVID 19 pandemic has affected 
-        football betting and team play."),
+                         p("We chose to look at sports betting in the NFL, which is the practice of placing wagers on football players and games. There is a wide range in the level of participation for sports betting: from casual fans to serious money-making fanatics. Regardless of motivations, all sports bets follow three simple steps: selection, stakes, and odds. The most popular types of sports bets are on point spreads and totals, where people often use statistics to decide on their bet and then wait for the game to be played to see the outcome. Betting is always a gamble, and sports betting involves necessary risk. Sports betting often happens online, which is where this project is focusing. We choose this domain because of a shared interest in sports, and curiosity about the world of football betting. This project will examine trends in National Football League (NFL) betting, especially how the COVID 19 pandemic has affected  football betting and team play."),
                          br(),
                          br(),
                          br(),
                          img(src = 'betting_infographic.PNG', alt = "US sports betting infographic", height="60%", width="60%", style = "display: block; margin-left: auto; margin-right: auto;"),
-                         tags$div(style = "text-align: center; font-size: 10px; display: block;", tags$em("This infographic, ", tags$a(href="https://www.economist.com/graphic-detail/2019/12/29/as-much-as-26bn-could-be-gambled-on-american-sport-in-2020", "by the Economist"), ", shows which states have legalized sports gambling on 
-        the map and the bar chart on the side shows the rapid growth of legal 
-        sports bets in the last few years.")),
+                         tags$div(style = "text-align: center; font-size: 10px; display: block;", tags$em("This infographic, ", tags$a(href="https://www.economist.com/graphic-detail/2019/12/29/as-much-as-26bn-could-be-gambled-on-american-sport-in-2020", "by the Economist"), ", shows which states have legalized sports gambling on the map and the bar chart on the side shows the rapid growth of legal sports bets in the last few years.")),
                          br(),
                          br(),
                          h3("Key Terms"),
                          br(),
                          br(),
-                         p(strong("Spread"), "- the expected point margin by which a team will win 
-        or lose by. In other words, how much a team is favored by. A ", 
+                         p(strong("Spread"), "- the expected point margin by which a team will win or lose by. In other words, how much a team is favored by. A ", 
                            em("negative"), " spread implies the team is favored by that amount. A ",
                            em("positive")," spread implies the team is the underdog by that amount." ),
                          br(),
-                         p(strong("Cover the spread"), "- the underdog/favored team was able to 
-        win/lose by the certain threshold. An underdog team can either lose by 
-        the number of points set in the spread or less and cover the spread. In 
-        other words, the underdog is given a handicap. Moreover, the favored team ",
+                         p(strong("Cover the spread"), "- the underdog/favored team was able to win/lose by the certain threshold. An underdog team can either lose by the number of points set in the spread or less and cover the spread. In other words, the underdog is given a handicap. Moreover, the favored team ",
                            em("has"), " to win by the given spread or they will not cover the spread."),
                          br(),
-                         p(strong("Over Under"), "- the expected total number of points scored by 
-        both teams in the given game. People can either bet on the over (going 
-        to go over the expected total) or the under (going under the expected 
-        total)."),
+                         p(strong("Over Under"), "- the expected total number of points scored by both teams in the given game. People can either bet on the over (going to go over the expected total) or the under (going under the expected total)."),
                          br(),
                          br(),
-                         p(em("E.g."), "the super bowl between the Chiefs and the Buccaneers this 
-        year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 
-        57.7. This means that the Chiefs were favored by 3.5 points, and they 
-        had to win by 3.5 points or else they wouldn't cover the spread. The 
-        Buccaneers on the other hand, could lose by less than 3.5 points or just
-        win to cover the spread. The Buccaneers came out on top 31-9, so Chiefs
-        didn't cover and the game went under since the total points scored was 
-        under 57.7."),
+                         p(em("E.g."), "the super bowl between the Chiefs and the Buccaneers this year (Super Bowl 55), had a spread of Chiefs -3.5 and an over/under of 57.7. This means that the Chiefs were favored by 3.5 points, and they had to win by 3.5 points or else they wouldn't cover the spread. The Buccaneers on the other hand, could lose by less than 3.5 points or just win to cover the spread. The Buccaneers came out on top 31-9, so Chiefs didn't cover and the game went under since the total points scored was under 57.7."),
                          br(),
                          br(),
                          h3("Summary Information"),
                          br(),
                          br(),
-                         p("Our dataset includes ", textOutput("num_obs"), " observations that contain 
-        values in the favorite team and spread favorite columns. We specifically 
-        chose to keep the observations with these variables since we wanted to 
-        study the trend of the betting. This turned out to be around ", 
+                         p("Our dataset includes ", textOutput("num_obs"), " observations that contain values in the favorite team and spread favorite columns. We specifically chose to keep the observations with these variables since we wanted to study the trend of the betting. This turned out to be around ", 
                            textOutput("num_unique_years"), "seasons worth of data with ", 
-                           textOutput("num_different_teams"), " different teams. Thus, ignoring the 
-        rows without spread data, the smallest spread 
-        turned out to be ", textOutput("favorite_min_spread"), " , which which is 
-        also considered a 50/50 game or a tossup. Our biggest spread turned out 
-        to be ", textOutput("favorite_max_spread"), " which is considered to be a 
-        very one sided game. However,our mean turned out to be ", 
-                           textOutput("favorite_spread_mean"), " which was much closer to a 50/50
-        game than a one sided game. We also found that the proportion of 
-        home teams that were favored was ", textOutput("prop_home_favorite"), " 
-        and of the home favorites we found the proportion to cover the spread 
-        to be ", textOutput("prop_home_favorite_cover") )
+                           textOutput("num_different_teams"), " different teams. Thus, ignoring the rows without spread data, the smallest spread turned out to be ", textOutput("favorite_min_spread"), " , which which is also considered a 50/50 game or a tossup. Our biggest spread turned out to be ", textOutput("favorite_max_spread"), " which is considered to be a very one sided game. However,our mean turned out to be ", textOutput("favorite_spread_mean"), " which was much closer to a 50/50 game than a one sided game. We also found that the proportion of home teams that were favored was ", textOutput("prop_home_favorite"), " and of the home favorites we found the proportion to cover the spread to be ", textOutput("prop_home_favorite_cover") )
                          
                      )
             ),
   )
 )
 
+# Betting Accuracy Page
 page_two <- tabPanel(
   "Betting Accuracy", 
   style = "margin-top: -20px",
@@ -217,16 +146,17 @@ page_two <- tabPanel(
       wellPanel(style = "margin-top: 10px; padding: 6px",
                 "The Average Percent Accuracy of Projected Favorites by Season",
                 plotlyOutput("bets_accuracy_plot")
-
+                
       ),
       wellPanel(style = "margin-top: 10px; padding: 6px",
-        "A Team's Percent Accuracy in a Given Season",
-        plotlyOutput("team_season_accuracy")
+                "A Team's Percent Accuracy in a Given Season",
+                plotlyOutput("team_season_accuracy")
       )
     )
   )
 )
 
+# Uncertainty in the Over/Under Lines Page
 page_three <- tabPanel(
   "Uncertainty in the Over/Under Lines",
   style = "margin-top: -20px",
@@ -240,10 +170,10 @@ page_three <- tabPanel(
                  div(style="display: inline-block;vertical-align:top; width: 150px;", year_input2), 
                  div(style="display: inline-block;vertical-align:top; width: 50px;",HTML("<br>")),
                  div(style="display: inline-block;vertical-align:top; width: 150px;", playoff_input),
-trend_input,   chooseSliderSkin(
-  skin = "Flat",
-  color = "#1C2833"
-), opacitybp_input
+                 trend_input,   chooseSliderSkin(
+                   skin = "Flat",
+                   color = "#1C2833"
+                 ), opacitybp_input
     ),
     
     mainPanel(style = "margin-top: 10px",
@@ -278,14 +208,14 @@ page_four <- tabPanel(
                    utilize this plot by studying the trend of the spread and once you can pin out the pattern,
                    you'll have a higher chance of spotting out the value and pick out the winners by 
                    the amount point spread more confidently."), 
-                   
-                    
-     
+                 
+                 
+                 
     ),
     mainPanel(style = "margin-top: 10px",
-      wellPanel(style = "padding: 6px",
-        plotlyOutput("week_spreadplot")
-      )
+              wellPanel(style = "padding: 6px",
+                        plotlyOutput("week_spreadplot")
+              )
     )
   )
 )
@@ -305,7 +235,7 @@ page_five <- tabPanel(
   fluidRow(
     column(4,
            tags$div(HTML(
-           "<div class=flip-card>
+             "<div class=flip-card>
               <div class=flip-card-inner>
                 <div class=flip-card-front>
                   <h2 style=text-align:center;vertical-align:middle>Betting Accuracy</h2> 
@@ -327,20 +257,20 @@ page_five <- tabPanel(
            ))),
     column(4,
            tags$div(HTML(
-           "<div class=flip-card>
+             "<div class=flip-card>
               <div class=flip-card-inner>
                 <div class=flip-card-front>
                   <h2 style=text-align:center>Uncertainty in the Over/Under Lines</h2> 
                 </div>
                 <div class=flip-card-back>
-                  <i style=text-align:center; padding:30px>Kobe: It was interesting to see how the Over/Under lines differed amongst different seasons. But overall, we've seen a trend up in offensive scoring, causing the Over/Under lines to increase proportionally. However, we saw odds makers didn't take into account more factors to why offenses would start scoring more in the 2020 season as we saw totals going way over the line in the first few weeks. Odd makers definitely had a very tough time making lines in this unprecedented season. Though I think they will have much better lines for the 2021 season as they were able to collect data for one season through a pandemic.</i>
+                  <i style=text-align:center; padding:30px>Kobe: It was interesting to see how the Over/Under lines differed amongst different seasons. But overall, we've seen a trend up in offensive scoring, causing the Over/Under lines to increase proportionally. However, we saw odds makers didn't take into account more factors to why offenses would start scoring more in the 2020 season as we saw totals going way over the line in the first few weeks. Odd makers definitely had a very tough time making lines in this unprecedented season. Though I think they will have much better lines for the 2021 season as they were able to collect data for one season through a pandemic. Overall, we observed a trend of uncertainty before the start of the season, as Over/Under Lines and total scored points in the first few weeks of 2020 had wide margins compared to the other seasons.</i>
                 </div>
               </div>
             </div>"
            ))),
     column(4,
            tags$div(HTML(
-           "<div class=flip-card>
+             "<div class=flip-card>
               <div class=flip-card-inner>
                 <div class=flip-card-front>
                   <h2>Weeks & Seasons Average Spread</h2> 
@@ -361,7 +291,7 @@ page_five <- tabPanel(
   ),
   
   br(),
-
+  
   fluidRow(
     column(5,
            wellPanel(
@@ -385,12 +315,12 @@ page_five <- tabPanel(
                      
            ),
            
-             wellPanel(style = "width: 790px; height: 320px; padding: 6px",
-                       a(href ="https://www.oddsshark.com/nfl/sites", img(src = 'ball_money.png', alt = "Football Showered with Money", style = "width: 775px; height: 305px;"), style = "text-align: center; font-size: 10px; display: block;")
-             )
+           wellPanel(style = "width: 790px; height: 320px; padding: 6px",
+                     a(href ="https://www.oddsshark.com/nfl/sites", img(src = 'ball_money.png', alt = "Football Showered with Money", style = "width: 775px; height: 305px;"), style = "text-align: center; font-size: 10px; display: block;")
            )
-
-
+    )
+    
+    
   )
   
 )
