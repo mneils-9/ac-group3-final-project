@@ -119,22 +119,8 @@ page_two <- tabPanel(
   titlePanel("Betting Accuracy"),
   sidebarLayout(
     sidebarPanel(style = "margin-top: 10px", 
-                 h4("A key aspect of sports betting is making predictions on who will win 
-         the game. In this section, we examine how those predictions stacked up 
-         with actual game outcomes."),
-                 p("This first plot is intended to show the relationship between the average percent
-      accuracy of projected winners actually winning over the seasons. For the 
-      first couple years of data, there are not many games recorded which results
-      in outliers where the percent accuracy is either 100% or 0%. From the year
-      1980 and beyond, we can see a general trend represented with the red trend
-      line of a percent accuracy around 60%. This means that for each season,
-      where there are multiple games played, the average accuracy of the 
-      projected favorite team winning is about 60%. This plot is answering the
-      question of whether the accuracy of projected favorites changed for the 
-      2020 season due to the COVID 19 pandemic and an adjusted season. In the 
-      plot, we can see that there was no significant change in the accuracy of 
-      predicting winners, as the point for 2020 percent accuracy lies within the
-      expected values represented by the shadow of the trend line."),
+                 h4("A key aspect of sports betting is making predictions on who will win the game. In this section, we examine how those predictions stacked up with actual game outcomes."),
+                 p("This first plot is intended to show the relationship between the average percent accuracy of projected winners actually winning over the seasons. For the first couple years of data, there are not many games recorded which results in outliers where the percent accuracy is either 100% or 0%. From the year 1980 and beyond, we can see a general trend represented with the red trend line of a percent accuracy around 60%. This means that for each season, where there are multiple games played, the average accuracy of the projected favorite team winning is about 60%. This plot is answering the question of whether the accuracy of projected favorites changed for the 2020 season due to the COVID 19 pandemic and an adjusted season. In the plot, we can see that there was no significant change in the accuracy of predicting winners, as the point for 2020 percent accuracy lies within the expected values represented by the shadow of the trend line."),
                  br(),
                  p("This second plot allows you to choose a team and a season year to see 
         how well bettors are able to predict game outcomes for home games. *Tip: 
@@ -182,8 +168,7 @@ page_three <- tabPanel(
                         plotlyOutput("ou_boxplot")
               ),
               
-              wellPanel(
-                "We are able to see that in many cases the set Over/Under Lines was much lower compared to the total points scored. However, it is a common trend that oddsmakers increase the line as we see total points scored increase. Especially in the 2020 season, we can see that the average total scored points appears to be higher than the Over/Under Line for the first couple of weeks. It dipped for a bit after that but took a bit of a bounce-back after week 10. Overall, we do see that points are being scored at an increasing rate, causing the Over/Under Lines to go up as well. For the past decade or so, we have seen the average total points scored deviate away from the average calculated across all seasons."
+              wellPanel("We are able to see that in many cases the set Over/Under Lines was much lower compared to the total points scored. However, it is a common trend that oddsmakers increase the line as we see total points scored increase. Especially in the 2020 season, we can see that the average total scored points appears to be higher than the Over/Under Line for the first couple of weeks. It dipped for a bit after that but took a bit of a bounce-back after week 10. Overall, we do see that points are being scored at an increasing rate, causing the Over/Under Lines to go up as well. For the past decade or so, we have seen the average total points scored deviate away from the average calculated across all seasons."
               )
     )
   )
@@ -197,17 +182,7 @@ page_four <- tabPanel(
   
   sidebarLayout(
     sidebarPanel(style = "margin-top: 10px", week_input,
-                 p("As we mentioned on an introduction page, spread is  the expected 
-                   point margin by which a team will win or lose by. Point spread bets
-                   are a popular type of sports bet that you can make. Point spread bets
-                   is also mostly likely to be a big part of your winning betting strategy.
-                   Matter of fact, many successful professional sports bettors use the point spread
-                   bets stategy to make up their winning stategy. As the world was hit with COVID 19,
-                   I wanted to see if it would affect the average spread in the NFL sport betting at all.
-                   It turns out out that COVID 19 does not affect the average spread. However, You can still 
-                   utilize this plot by studying the trend of the spread and once you can pin out the pattern,
-                   you'll have a higher chance of spotting out the value and pick out the winners by 
-                   the amount point spread more confidently."), 
+                 p("As we mentioned on an introduction page, spread is  the expected point margin by which a team will win or lose by. Point spread bets are a popular type of sports bet that you can make. Point spread bets is also mostly likely to be a big part of your winning betting strategy. Matter of fact, many successful professional sports bettors use the point spread bets stategy to make up their winning stategy. As the world was hit with COVID 19, I wanted to see if it would affect the average spread in the NFL sport betting at all. It turns out out that COVID 19 does not affect the average spread. However, You can still utilize this plot by studying the trend of the spread and once you can pin out the pattern, you'll have a higher chance of spotting out the value and pick out the winners by the amount point spread more confidently."), 
                  
                  
                  
@@ -226,11 +201,10 @@ page_five <- tabPanel(
   icon = icon("i", "fa-check-square"),
   titlePanel("Finishing Thoughts"),
   wellPanel(style = "margin-top: 21px",
-            h4("After completing this project, we have come up with important 
-               insights for people who are interested in betting on NFL games. 
-               Using knowledge gained from this project, potential bettors are 
-               better equipped to make smart predictions about who will win a 
-               game. Especially with the 2020 season behind us, line makers now have data from a season under a pandemic they can use to alter the lines. All in all, the pandemic resulted in uncertainty before the start of the season, but that uncertainty chipped away as the season progressed.", em("(Hover over each title to get each of our reflections.)"))
+            h4("After completing this project, we have come up with important insights for people who are interested in betting on NFL games. Using knowledge gained from this project, potential bettors are better equipped to make smart predictions about who will win a game."),
+            h4(
+            "All in all, the pandemic resulted in uncertainty before the start of the season, but that uncertainty chipped away as the season progressed. Linemakers were able to adapt to the high scoring play-style of the teams over this past season. Now, line makers now have data from a season under a pandemic they can use to set better lines. Even for bettors, they will have the data need to make smarter and safer bets for future seasons.", 
+            em("(Hover over each title to get each of our reflections.)"))
   ),
   fluidRow(
     column(4,
@@ -241,16 +215,7 @@ page_five <- tabPanel(
                   <h2 style=text-align:center;vertical-align:middle>Betting Accuracy</h2> 
                 </div>
                 <div class=flip-card-back>
-                  <i style=text-align:center>Maddie: I analyzed how the accuracy of projected favorites changed 
-                          in the 2020 season. I explore NFL 
-                          betting accuracy which has consistently been around 60% accurate 
-                          for the more recent seasons that we have a complete set of data 
-                          for where all season's games are reported. Looking specifically at 
-                          the 2020 season, we can see that here was no significant change in 
-                          the accuracy of predicting winners, as it is around 63% accurate. 
-                          Knowing that the 2020 NFL season was shaken up due to the COVID 19
-                          pandemic, it is suprising that sports bets continue to be 
-                          relatively accurate.</i>
+                  <i style=text-align:center>Maddie: I analyzed how the accuracy of projected favorites changed in the 2020 season. I explore NFL betting accuracy which has consistently been around 60% accurate for the more recent seasons that we have a complete set of data for where all season's games are reported. Looking specifically at the 2020 season, we can see that here was no significant change in the accuracy of predicting winners, as it is around 63% accurate. Knowing that the 2020 NFL season was shaken up due to the COVID 19 pandemic, it is suprising that sports bets continue to be relatively accurate.</i>
                 </div>
               </div>
             </div>"
@@ -263,7 +228,7 @@ page_five <- tabPanel(
                   <h2 style=text-align:center>Uncertainty in the Over/Under Lines</h2> 
                 </div>
                 <div class=flip-card-back>
-                  <i style=text-align:center; padding:30px>Kobe: It was interesting to see how the Over/Under lines differed amongst different seasons. But overall, we've seen a trend up in offensive scoring, causing the Over/Under lines to increase proportionally. However, we saw odds makers didn't take into account more factors to why offenses would start scoring more in the 2020 season as we saw totals going way over the line in the first few weeks. Odd makers definitely had a very tough time making lines in this unprecedented season. Though I think they will have much better lines for the 2021 season as they were able to collect data for one season through a pandemic. Overall, we observed a trend of uncertainty before the start of the season, as Over/Under Lines and total scored points in the first few weeks of 2020 had wide margins compared to the other seasons.</i>
+                  <i style=text-align:center; padding:30px>Kobe: It was interesting to see how the Over/Under lines differed amongst different seasons. We saw odds makers didn't take into account more factors to why offenses would start scoring more in the 2020 season as we saw totals going way over the line in the first few weeks. Odd makers definitely had a very tough time making lines in this unprecedented season, the first of its kind. However, I think they will have much better lines for the 2021 season as they were able to collect data for one season through a pandemic. Overall, we observed a trend of uncertainty before the start of the season, as Over/Under Lines and total scored points in the first few weeks of 2020 had wide margins compared to the other seasons.</i>
                 </div>
               </div>
             </div>"
@@ -276,14 +241,7 @@ page_five <- tabPanel(
                   <h2>Weeks & Seasons Average Spread</h2> 
                 </div>
                 <div class=flip-card-back>
-                  <i>Bryan: I analyzed how Covid 19 would affect the average spread.
-              In interactive Visuals part 3, I explore the changes in average spread
-              per week of each NFL seasons. From analyzing the trend of average of all the
-              seasons before 2020 and comparing it with the 2020 NFL season,
-              I see that there was no correlation between Covid 19 and the average spread.
-              The average spread still moved in a normal trend. From what I see, 
-              the average spread from week 1 to week 18 from the year 2015 to 2020. The spread
-              average never exceed or fall by 1.5 points each following year which was unique and cool to see. </i>
+                  <i>Bryan: I analyzed how Covid 19 would affect the average spread. In interactive Visuals part 3, I explore the changes in average spread per week of each NFL seasons. From analyzing the trend of average of all the seasons before 2020 and comparing it with the 2020 NFL season, I see that there was no correlation between Covid 19 and the average spread. The average spread still moved in a normal trend. From what I see, the average spread from week 1 to week 18 from the year 2015 to 2020. The spread average never exceed or fall by 1.5 points each following year which was unique and cool to see. </i>
                 </div>
               </div>
             </div>"
@@ -299,19 +257,11 @@ page_five <- tabPanel(
            )
     ),
     column(5,
-           wellPanel(style = "width: 790px",
-                     p("Interested in placing bets? Check out this table showing each 
-              team's average score during a home game. This will be helpful to new 
-              bettors since for each NFL game the oddsmakers set a number of points
-              in which the favorite team is favored by. By making this table it 
-              allows the bettors to see the average scores of the favorite home 
-              team and either choose for the favored team to win by more than 
-              the number of points set, or bet on the underdogs to lose by less 
-              than the number of points, it can also work the other way around 
-              as well. Therefore by figuring out the favorite team and the 
-              average score of the hometeam, it'll give us a better chance of 
-              the prediction on how much points that the bettor's team will win 
-              or lose by.", em("Click on the image below to get a list of betting sites available.")),
+           wellPanel(style = "width: 790px; height: 195px; padding: 4px",
+                     p("Interested in placing bets? Check out this table showing each team's average score during a home game. This will be helpful to new bettors since for each NFL game the oddsmakers set a number of points in which the favorite team is favored by. By making this table it allows the bettors to see the average scores of the favorite home team and either choose for the favored team to win by more than the number of points set, or bet on the underdogs to lose by less than the number of points, it can also work the other way around as well. Therefore by figuring out the favorite team and the average score of the hometeam, it'll give us a better chance of the prediction on how much points that the bettor's team will win or lose by.", 
+                       br(),
+                       br(),
+                       em("Click on the image below to get a list of betting sites available.")),
                      
            ),
            
